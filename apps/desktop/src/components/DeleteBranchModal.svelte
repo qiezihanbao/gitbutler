@@ -8,6 +8,7 @@
 
 <script lang="ts">
 	import { STACK_SERVICE } from '$lib/stacks/stackService.svelte';
+	import { t } from '$lib/i18n/i18n';
 	import { inject } from '@gitbutler/core/context';
 	import { Button, Modal, TestId } from '@gitbutler/ui';
 
@@ -26,7 +27,7 @@
 	testId={TestId.BranchHeaderDeleteModal}
 	bind:this={modal}
 	width="small"
-	title="Delete branch"
+	title={$t('branches.delete_branch_title')}
 	onSubmit={async (close) => {
 		await removeBranch({
 			projectId,
@@ -37,15 +38,15 @@
 	}}
 >
 	<p class="text-13 text-body">
-		Are you sure you want to delete <code class="code-string">{branchName}</code>?
+		{@html $t('branches.delete_branch_with_name', { values: { branchName } })}
 	</p>
 	{#snippet controls(close)}
-		<Button kind="outline" onclick={close} autofocus>Cancel</Button>
+		<Button kind="outline" onclick={close} autofocus>{$t('common.cancel')}</Button>
 		<Button
 			testId={TestId.BranchHeaderDeleteModal_ActionButton}
 			style="danger"
 			type="submit"
-			loading={branchRemovalOp.current.isLoading}>Delete</Button
+			loading={branchRemovalOp.current.isLoading}>{$t('branches.delete')}</Button
 		>
 	{/snippet}
 </Modal>

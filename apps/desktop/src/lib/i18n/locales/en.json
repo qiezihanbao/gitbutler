@@ -25,7 +25,16 @@
 		"back": "Back",
 		"next": "Next",
 		"finish": "Finish",
-		"skip": "Skip"
+		"skip": "Skip",
+		"dismiss": "Dismiss",
+		"see_more": "See more",
+		"read_more": "Read more",
+		"configure": "Configure",
+		"apply": "Apply",
+		"create": "Create",
+		"update": "Update",
+		"remove": "Remove",
+		"add": "Add"
 	},
 	"app": {
 		"name": "GitButler",
@@ -48,7 +57,8 @@
 		"history": "History",
 		"projects": "Projects",
 		"switch_to_workspace": "Switch to Workspace",
-		"toggle_sidebar": "Toggle Sidebar"
+		"toggle_sidebar": "Toggle Sidebar",
+		"add_local_repo": "Add Local Repo"
 	},
 	"branches": {
 		"title": "Branches",
@@ -58,7 +68,31 @@
 		"merge": "Merge Branch",
 		"current": "Current Branch",
 		"no_branches": "No branches found",
-		"unapplied": "Unapplied"
+		"unapplied": "Unapplied",
+		"independent": "Independent branch",
+		"independent_description": "Create an independent branch in a new stack.",
+		"dependent": "Dependent branch",
+		"dependent_description": "Create a branch dependent on the current branch.",
+		"will_be_applied": "The new branch will be applied in parallel with other stacks in the workspace.",
+		"adjust_placement": "Adjust branch placement and preferences in",
+		"review_requested": "Review Requested",
+		"no_local_branches": "No local branches found",
+		"no_branches_or_prs": "No branches or {abbr}s found",
+		"no_branches_match_filter": "No branches match your filter",
+		"create_new_branch": "Create a new branch or fetch from your remote.",
+		"branches_from_will_appear": "Branches and {abbr}s from<br/><strong>{remote}</strong><br/>will appear here.",
+		"authenticate_with": "Authenticate with {name} to see {abbr}s.",
+		"no_prs_found": "No {abbr}s found",
+		"no_prs_from": "from <strong>{remote}</strong>",
+		"rename": "Rename",
+		"rename_branch": "Rename branch",
+		"branch_already_pushed": "Branch has already been pushed",
+		"new_name": "New name",
+		"rename_warning": "Renaming a branch that has already been pushed will create a new branch at the remote. The old one will remain untouched but will be disassociated from this branch.",
+		"delete_branch_title": "Delete branch",
+		"delete_branch_confirm": "Are you sure you want to delete this branch?",
+		"delete_branch_with_name": "Are you sure you want to delete <code class=\"code-string\">{branchName}</code>?",
+		"delete_branch_button": "Delete branch"
 	},
 	"commits": {
 		"title": "Commits",
@@ -68,7 +102,13 @@
 		"pull": "Pull",
 		"no_commits": "No commits found",
 		"commit_message": "Commit message",
-		"commit_message_placeholder": "Enter commit message..."
+		"commit_message_placeholder": "Enter commit message...",
+		"commit_title_placeholder": "Commit title (required)",
+		"commit_description_placeholder": "Commit message",
+		"create_commit": "Create commit",
+		"start_commit": "Start a commit",
+		"drop_files": "Drop files to assign or commit directly",
+		"commit_to_new_branch": "Commit to new branch"
 	},
 	"files": {
 		"title": "Files",
@@ -99,11 +139,37 @@
 		"telemetry": "Telemetry",
 		"experimental": "Experimental",
 		"organizations": "Organizations",
-		"our_discord": "Our Discord"
+		"our_discord": "Our Discord",
+		"auto_fill_pr": "Auto-fill PR/MR description from first commit"
 	},
 	"workspace": {
 		"title": "Workspace",
 		"no_virtual_branches": "No virtual branches",
-		"create_branch": "Create Branch"
+		"create_branch": "Create Branch",
+		"unassigned": "Unassigned",
+		"current_target": "Current workspace target",
+		"all_caught_up": "You're all caught up!",
+		"no_files_need_committing": "No files need committing",
+		"committing": "Committing…"
+	},
+	"forge": {
+		"github_remote": "It looks like you have a {forge} remote!",
+		"can_manage": "GitButler can display, create and manage {unit} for you directly in the app.",
+		"configure_integration": "Configure integration…"
+	},
+	"time": {
+		"today": "Today",
+		"yesterday": "Yesterday",
+		"last_week": "Last week",
+		"older": "Older",
+		"hours_ago": "{hours} hours ago",
+		"days_ago": "{days} days ago",
+		"months_ago": "{months} months ago",
+		"just_now": "Just now",
+		"up_to_date": "You're up to date"
+	},
+	"stack": {
+		"stacked_vs_dependent": "Stacked vs. Dependent",
+		"read_docs": "Read more"
 	}
 }

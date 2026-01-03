@@ -8,6 +8,7 @@
 	import { STACK_SERVICE } from '$lib/stacks/stackService.svelte';
 	import { inject } from '@gitbutler/core/context';
 	import { persisted } from '@gitbutler/shared/persisted';
+	import { t } from '$lib/i18n/i18n';
 
 	import {
 		Button,
@@ -161,9 +162,9 @@
 				</div>
 
 				<div class="radio-content">
-					<h3 class="text-14 text-bold text-body radio-title">Independent branch</h3>
+					<h3 class="text-14 text-bold text-body radio-title">{$t('branches.independent')}</h3>
 					<p class="text-12 text-body radio-caption">
-						Create an independent branch<br />in a new stack.
+						{$t('branches.independent_description')}
 					</p>
 
 					<div class="radio-illustration">
@@ -258,14 +259,14 @@
 	{#snippet controls(close)}
 		<div class="footer">
 			<span class="text-12 text-body footer-text"
-				>See more: <Link
+				>{$t('common.see_more')}: <Link
 					href="https://docs.gitbutler.com/features/branch-management/stacked-branches"
-					>Stacked vs. Dependent</Link
+					>{$t('stack.stacked_vs_dependent')}</Link
 				></span
 			>
 
 			<div class="footer__controls">
-				<Button kind="outline" type="reset" onclick={close}>Cancel</Button>
+				<Button kind="outline" type="reset" onclick={close}>{$t('common.cancel')}</Button>
 				<Button
 					style="pop"
 					type="submit"
@@ -274,7 +275,7 @@
 					loading={isAddingNew}
 					testId={TestId.ConfirmSubmit}
 				>
-					Create branch
+					{$t('branches.create')}
 				</Button>
 			</div>
 		</div>

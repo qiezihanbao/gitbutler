@@ -19,6 +19,7 @@
 	import { reactive } from '@gitbutler/shared/reactiveUtils.svelte';
 	import { Badge, Button, EmptyStatePlaceholder, SegmentControl } from '@gitbutler/ui';
 	import Fuse from 'fuse.js';
+	import { t } from '$lib/i18n/i18n';
 	import type { BaseBranch } from '$lib/baseBranch/baseBranch';
 	import type { ForgeUser } from '$lib/forge/interface/types';
 	import type { Snippet } from 'svelte';
@@ -230,20 +231,20 @@
 						{/if}
 
 						{#if groupedBranches.review.length > 0}
-							{@render branchGroup({ title: 'Review Requested', children: groupedBranches.review })}
+							{@render branchGroup({ title: $t('branches.review_requested'), children: groupedBranches.review })}
 						{/if}
 
-						{@render branchGroup({ title: 'Today', children: groupedBranches.today })}
-						{@render branchGroup({ title: 'Yesterday', children: groupedBranches.yesterday })}
-						{@render branchGroup({ title: 'Last week', children: groupedBranches.lastWeek })}
-						{@render branchGroup({ title: 'Older', children: groupedBranches.older })}
+						{@render branchGroup({ title: $t('time.today'), children: groupedBranches.today })}
+						{@render branchGroup({ title: $t('time.yesterday'), children: groupedBranches.yesterday })}
+						{@render branchGroup({ title: $t('time.last_week'), children: groupedBranches.lastWeek })}
+						{@render branchGroup({ title: $t('time.older'), children: groupedBranches.older })}
 					{/if}
 				</ScrollableContainer>
 			</div>
 		{:else}
 			<EmptyStatePlaceholder image={noBranchesSvg} width={180} bottomMargin={48}>
 				{#snippet caption()}
-					No branches<br />match your filter
+					{@html $t('branches.no_branches_match_filter').replace('\n', '<br />')}
 				{/snippet}
 			</EmptyStatePlaceholder>
 		{/if}
@@ -252,24 +253,31 @@
 			<EmptyStatePlaceholder image={noBranchesSvg} width={EMPTY_STATE_WIDTH} bottomMargin={48}>
 				{#snippet title()}
 					{#if selectedOption === 'local'}
-						No local branches found
+						{$t('branches.no_local_branches')}
 					{:else}
-						No branches or {forge.reviewUnitAbbr}s found
+						{$t('branches.no_branches_or_prs', { values: { abbr: forge.reviewUnitAbbr } })}
 					{/if}
 				{/snippet}
 				{#snippet caption()}
 					{#if selectedOption === 'pullRequest'}
-						No {forge.reviewUnitAbbr}s found {#if baseBranch}
-							from <strong>{baseBranch.remoteName}</strong>{/if}.
+						{$t('branches.no_prs_found', { values: { abbr: forge.reviewUnitAbbr } })}
+						{#if baseBranch}
+							{@html $t('branches.no_prs_from', { values: { remote: baseBranch.remoteName } })}.
+						{:else}
+							.
+						{/if}
 					{:else if selectedOption === 'local'}
-						Create a new branch or fetch from your remote.
+						{$t('branches.create_new_branch')}
 					{:else if baseBranch}
-						Branches and {forge.reviewUnitAbbr}s from
-						<strong>{baseBranch.remoteName}/{baseBranch.shortName}</strong>
-						will appear here.
+						{@html $t('branches.branches_from_will_appear', {
+							values: {
+								abbr: forge.reviewUnitAbbr,
+								remote: `${baseBranch.remoteName}/${baseBranch.shortName}`
+							}
+						})}
 					{/if}
 					{#if shouldShowAuthMessage}
-						Authenticate with {forgeName} to see {forge.reviewUnitAbbr}s.
+						{$t('branches.authenticate_with', { values: { name: forgeName, abbr: forge.reviewUnitAbbr } })}
 					{/if}
 				{/snippet}
 			</EmptyStatePlaceholder>

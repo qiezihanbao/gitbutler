@@ -12,6 +12,7 @@
 	import { useSettingsModal } from '$lib/settings/settingsModal.svelte';
 	import { inject } from '@gitbutler/core/context';
 	import { Button, Link } from '@gitbutler/ui';
+	import { t } from '$lib/i18n/i18n';
 
 	type Props = {
 		projectId: string;
@@ -74,16 +75,16 @@
 		<div class="forge-prompt__logo">
 			{@html forgeName === 'github' ? githubLogoSvg : gitlabLogoSvg}
 		</div>
-		<h3 class="text-13 text-body text-bold">It looks like you have a {forgeLabel} remote!</h3>
+		<h3 class="text-13 text-body text-bold">{$t('forge.github_remote', { values: { forge: forgeLabel } })}</h3>
 		<p class="text-12 text-body m-b-8 clr-text-2">
-			GitButler can display, create and manage {forgeUnit} for you directly in the app.
-			<Link href={integrationDocs}>Read more</Link>
+			{$t('forge.can_manage', { values: { unit: forgeUnit } })}
+			<Link href={integrationDocs}>{$t('common.read_more')}</Link>
 		</p>
 
 		<div class="forge-prompt__footer">
-			<Button kind="outline" onclick={dismissPrompt}>Dismiss</Button>
+			<Button kind="outline" onclick={dismissPrompt}>{$t('common.dismiss')}</Button>
 			<Button style="pop" onclick={() => configureIntegration(forgeName)}
-				>Configure integration…</Button
+				>{$t('forge.configure_integration')}</Button
 			>
 		</div>
 	</div>

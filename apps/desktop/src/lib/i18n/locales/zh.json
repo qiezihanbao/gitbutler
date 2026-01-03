@@ -25,7 +25,16 @@
 		"back": "返回",
 		"next": "下一步",
 		"finish": "完成",
-		"skip": "跳过"
+		"skip": "跳过",
+		"dismiss": "忽略",
+		"see_more": "查看更多",
+		"read_more": "阅读更多",
+		"configure": "配置",
+		"apply": "应用",
+		"create": "创建",
+		"update": "更新",
+		"remove": "移除",
+		"add": "添加"
 	},
 	"app": {
 		"name": "GitButler",
@@ -48,7 +57,8 @@
 		"history": "历史",
 		"projects": "项目",
 		"switch_to_workspace": "切换到工作区",
-		"toggle_sidebar": "切换侧边栏"
+		"toggle_sidebar": "切换侧边栏",
+		"add_local_repo": "添加本地仓库"
 	},
 	"branches": {
 		"title": "分支",
@@ -58,7 +68,31 @@
 		"merge": "合并分支",
 		"current": "当前分支",
 		"no_branches": "未找到分支",
-		"unapplied": "未应用"
+		"unapplied": "未应用",
+		"independent": "独立分支",
+		"independent_description": "在新堆栈中创建独立分支。",
+		"dependent": "依赖分支",
+		"dependent_description": "创建依赖当前分支的新分支。",
+		"will_be_applied": "新分支将与工作区中的其他堆栈并行应用。",
+		"adjust_placement": "在以下位置调整分支放置和偏好",
+		"review_requested": "已请求审查",
+		"no_local_branches": "未找到本地分支",
+		"no_branches_or_prs": "未找到分支或{abbr}",
+		"no_branches_match_filter": "没有匹配的分支",
+		"create_new_branch": "创建新分支或从远程获取。",
+		"branches_from_will_appear": "<strong>{remote}</strong> 的分支和{abbr}<br/>将显示在这里。",
+		"authenticate_with": "使用 {name} 身份验证以查看 {abbr}。",
+		"no_prs_found": "未找到 {abbr}",
+		"no_prs_from": "来自 <strong>{remote}</strong>",
+		"rename": "重命名",
+		"rename_branch": "重命名分支",
+		"branch_already_pushed": "分支已推送",
+		"new_name": "新名称",
+		"rename_warning": "重命名已推送的分支将在远程创建新分支。旧分支将保持不变，但会与此分支解除关联。",
+		"delete_branch_title": "删除分支",
+		"delete_branch_confirm": "确定要删除此分支吗？",
+		"delete_branch_with_name": "确定要删除 <code class=\"code-string\">{branchName}</code> 吗？",
+		"delete_branch_button": "删除分支"
 	},
 	"commits": {
 		"title": "提交",
@@ -68,7 +102,13 @@
 		"pull": "拉取",
 		"no_commits": "未找到提交",
 		"commit_message": "提交信息",
-		"commit_message_placeholder": "输入提交信息..."
+		"commit_message_placeholder": "输入提交信息...",
+		"commit_title_placeholder": "提交标题（必填）",
+		"commit_description_placeholder": "提交信息",
+		"create_commit": "创建提交",
+		"start_commit": "开始提交",
+		"drop_files": "拖放文件以直接分配或提交",
+		"commit_to_new_branch": "提交到新分支"
 	},
 	"files": {
 		"title": "文件",
@@ -99,11 +139,37 @@
 		"telemetry": "遥测",
 		"experimental": "实验性功能",
 		"organizations": "组织",
-		"our_discord": "Discord 社区"
+		"our_discord": "Discord 社区",
+		"auto_fill_pr": "从首次提交自动填充 PR/MR 描述"
 	},
 	"workspace": {
 		"title": "工作区",
 		"no_virtual_branches": "没有虚拟分支",
-		"create_branch": "创建分支"
+		"create_branch": "创建分支",
+		"unassigned": "未分配",
+		"current_target": "当前工作区目标",
+		"all_caught_up": "全部完成！",
+		"no_files_need_committing": "没有需要提交的文件",
+		"committing": "提交中…"
+	},
+	"forge": {
+		"github_remote": "看起来您有一个 {forge} 远程仓库！",
+		"can_manage": "GitButler 可以直接在应用中显示、创建和管理{unit}。",
+		"configure_integration": "配置集成…"
+	},
+	"time": {
+		"today": "今天",
+		"yesterday": "昨天",
+		"last_week": "上周",
+		"older": "更早",
+		"hours_ago": "{hours} 小时前",
+		"days_ago": "{days} 天前",
+		"months_ago": "{months} 个月前",
+		"just_now": "刚刚",
+		"up_to_date": "您已是最新"
+	},
+	"stack": {
+		"stacked_vs_dependent": "堆栈与依赖",
+		"read_docs": "阅读更多"
 	}
 }

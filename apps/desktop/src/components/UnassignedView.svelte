@@ -6,6 +6,7 @@
 	import { ActionEvent, POSTHOG_WRAPPER } from '$lib/analytics/posthog';
 	import noChanges from '$lib/assets/empty-state/no-new-changes.svg?raw';
 	import { stagingBehaviorFeature } from '$lib/config/uiFeatureFlags';
+	import { t } from '$lib/i18n/i18n';
 	import { FILE_SELECTION_MANAGER } from '$lib/selection/fileSelectionManager.svelte';
 	import { createWorktreeSelection } from '$lib/selection/key';
 	import { UNCOMMITTED_SERVICE } from '$lib/selection/uncommittedService.svelte';
@@ -103,7 +104,7 @@
 		<div class="unassigned-wrap">
 			<div role="presentation" class="unassigned-files-wrapper" onclick={unselectFiles}>
 				<WorktreeChanges
-					title="Unassigned"
+					title={$t('workspace.unassigned')}
 					{projectId}
 					stackId={undefined}
 					mode="unassigned"
@@ -113,8 +114,8 @@
 						<div class="unassigned-empty">
 							{@html noChanges}
 							<p class="text-13 text-body unassigned-empty-text">
-								You're all caught up!<br />
-								No files need committing
+								{$t('workspace.all_caught_up')}<br />
+								{$t('workspace.no_files_need_committing')}
 							</p>
 						</div>
 					{/snippet}
@@ -144,9 +145,9 @@
 						kind="outline"
 					>
 						{#if isCommitting}
-							Committing…
+							{$t('workspace.committing')}
 						{:else}
-							Commit to new branch
+							{$t('commits.commit_to_new_branch')}
 						{/if}
 					</Button>
 				</div>
@@ -172,7 +173,7 @@
 			<span
 				bind:clientWidth={foldedContentWidth}
 				style="height: {foldedContentWidth}px;"
-				class="unassigned-folded-text text-14 text-semibold">Unassigned</span
+				class="unassigned-folded-text text-14 text-semibold">{$t('workspace.unassigned')}</span
 			>
 		</div>
 	</div>

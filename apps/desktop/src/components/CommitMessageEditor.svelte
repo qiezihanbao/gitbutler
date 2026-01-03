@@ -10,6 +10,7 @@
 	import { AI_SERVICE } from '$lib/ai/service';
 	import { projectAiGenEnabled } from '$lib/config/config';
 	import { DIFF_SERVICE } from '$lib/hunks/diffService.svelte';
+	import { t } from '$lib/i18n/i18n';
 	import { UNCOMMITTED_SERVICE } from '$lib/selection/uncommittedService.svelte';
 	import { STACK_SERVICE } from '$lib/stacks/stackService.svelte';
 	import { UI_STATE } from '$lib/state/uiState.svelte';
@@ -49,7 +50,7 @@
 		loading,
 		title,
 		description,
-		floatingBoxHeader = 'Create commit',
+		floatingBoxHeader = $t('commits.create_commit'),
 		existingCommitId
 	}: Props = $props();
 
@@ -163,7 +164,7 @@
 		testId={TestId.CommitDrawerTitleInput}
 		bind:ref={titleInput}
 		bind:value={title}
-		placeholder="Commit title (required)"
+		placeholder={$t('commits.commit_title_placeholder')}
 		onchange={(value) => {
 			onChange?.({ title: value });
 		}}
@@ -190,7 +191,7 @@
 		testId={TestId.CommitDrawerDescriptionInput}
 		bind:this={composer}
 		initialValue={description}
-		placeholder="Commit message"
+		placeholder={$t('commits.commit_description_placeholder')}
 		messageType="commit"
 		enableRuler
 		{projectId}
