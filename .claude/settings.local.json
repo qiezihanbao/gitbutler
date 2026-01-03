@@ -12,7 +12,9 @@
       "Bash(netstat:*)",
       "Bash(findstr:*)",
       "Bash(taskkill:*)",
-      "Bash(tasklist:*)"
+      "Bash(tasklist:*)",
+      "Bash(pnpm build:desktop:*)",
+      "Bash(pnpm tauri build:*)"
     ]
   }
 }

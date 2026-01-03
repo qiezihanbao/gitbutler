@@ -2,7 +2,7 @@
 	"productName": "GitButler Nightly",
 	"identifier": "com.gitbutler.app.nightly",
 	"build": {
-		"beforeBuildCommand": "bash ./crates/gitbutler-tauri/tauri-before-build-command.sh nightly"
+		"beforeBuildCommand": "echo skipping beforeBuildCommand on Windows"
 	},
 	"bundle": {
 		"active": true,

@@ -1,8 +1,5 @@
-use crate::menu::build as build_menu;
-use anyhow::Context as _;
 use serde::Deserialize;
-use std::collections::HashMap;
-use tauri::{AppHandle, Manager, Runtime};
+use tauri::{AppHandle, Emitter, Manager, Runtime};
 
 #[derive(Deserialize, Clone)]
 pub struct MenuTranslations {
@@ -61,7 +58,8 @@ pub fn set_translations(translations: MenuTranslations) {
 /// Get a translated string by key
 pub fn get_translation(key: &str) -> String {
     unsafe {
-        if let Some(trans) = &CURRENT_TRANSLATIONS {
+        let ptr = &raw const CURRENT_TRANSLATIONS;
+        if let Some(trans) = &*ptr {
             match key {
                 "file" => trans.file.clone(),
                 "edit" => trans.edit.clone(),
@@ -116,7 +114,7 @@ pub fn get_translation(key: &str) -> String {
 pub async fn build_i18n_menu<R: Runtime>(
     handle: AppHandle<R>,
     translations: MenuTranslations,
-    platform: String,
+    _platform: String,
 ) -> Result<(), String> {
     // Store translations globally
     set_translations(translations);

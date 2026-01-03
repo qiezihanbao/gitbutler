@@ -3,7 +3,7 @@ import enTranslations from '$lib/i18n/locales/en.json';
 import zhTranslations from '$lib/i18n/locales/zh.json';
 import { getVersion } from '@tauri-apps/api/app';
 import { invoke } from '@tauri-apps/api/core';
-import { platform } from '@tauri-apps/api/os';
+import { platform } from '@tauri-apps/plugin-os';
 import type { Locale } from 'svelte-i18n';
 
 interface MenuTranslations {
