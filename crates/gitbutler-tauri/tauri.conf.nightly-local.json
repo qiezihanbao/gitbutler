@@ -2,7 +2,8 @@
 	"productName": "GitButler Nightly",
 	"identifier": "com.gitbutler.app.nightly",
 	"build": {
-		"beforeBuildCommand": "echo skipping beforeBuildCommand on Windows"
+		"beforeBuildCommand": "echo skipping beforeBuildCommand on Windows",
+		"frontendDist": "../../apps/desktop/build"
 	},
 	"bundle": {
 		"active": true,
