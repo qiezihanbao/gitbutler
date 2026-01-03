@@ -19,7 +19,7 @@ use but_claude::{Broadcaster, Claude};
 use but_settings::AppSettingsWithDiskSync;
 use gitbutler_tauri::{
     WindowState, action, askpass, bot, claude, csp::csp_with_extras, env, logs, menu, projects,
-    settings, zip,
+    settings, zip, i18n_menu,
 };
 use tauri::{Emitter, Manager, generate_context};
 use tauri_plugin_deep_link::DeepLinkExt;

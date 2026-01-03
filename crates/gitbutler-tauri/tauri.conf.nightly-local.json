@@ -6,6 +6,7 @@
 	},
 	"bundle": {
 		"active": true,
+		"createUpdaterArtifacts": false,
 		"icon": [
 			"icons/nightly/32x32.png",
 			"icons/nightly/128x128.png",
