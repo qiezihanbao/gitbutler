@@ -15,10 +15,11 @@
 	} from '$lib/routes/routes.svelte';
 	import { useSettingsModal } from '$lib/settings/settingsModal.svelte';
 	import { SETTINGS } from '$lib/settings/userSettings';
+	import { toggleLocale, getLocaleName, type SupportedLocale } from '$lib/i18n/languageService';
+	import { t, locale } from '$lib/i18n/i18n';
 	import { inject } from '@gitbutler/core/context';
 	import { Button, ContextMenu, ContextMenuItem, ContextMenuSection, TestId } from '@gitbutler/ui';
 	import { focusable } from '@gitbutler/ui/focus/focusable';
-	import { t } from '$lib/i18n/i18n';
 
 	import { slide } from 'svelte/transition';
 
@@ -30,7 +31,15 @@
 
 	const userSettings = inject(SETTINGS);
 	const { openGeneralSettings, openProjectSettings } = useSettingsModal();
-</script>
+
+	// Language switcher
+	const currentLocale = $derived(locale.get() as SupportedLocale);
+	const localeName = $derived(getLocaleName(currentLocale));
+
+	function handleLanguageSwitch() {
+		toggleLocale();
+		location.reload();
+	}</script>
 
 <div class="sidebar" use:focusable>
 	<div class="top">
@@ -294,6 +303,28 @@
 					...s,
 					theme: 'system'
 				}));
+				contextMenuEl?.close();
+			}}
+		/>
+	</ContextMenuSection>
+	<ContextMenuSection title={$t('settings.language')}>
+		<ContextMenuItem
+			label="English"
+			selected={$currentLocale === 'en'}
+			onclick={() => {
+				if ($currentLocale !== 'en') {
+					handleLanguageSwitch();
+				}
+				contextMenuEl?.close();
+			}}
+		/>
+		<ContextMenuItem
+			label="中文"
+			selected={$currentLocale === 'zh'}
+			onclick={() => {
+				if ($currentLocale !== 'zh') {
+					handleLanguageSwitch();
+				}
 				contextMenuEl?.close();
 			}}
 		/>
