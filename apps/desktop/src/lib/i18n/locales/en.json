@@ -15,12 +15,40 @@
 		"error": "Error",
 		"warning": "Warning",
 		"info": "Information",
-		"success": "Success"
+		"success": "Success",
+		"copy": "Copy",
+		"paste": "Paste",
+		"undo": "Undo",
+		"redo": "Redo",
+		"docs": "Docs",
+		"help": "Help",
+		"back": "Back",
+		"next": "Next",
+		"finish": "Finish",
+		"skip": "Skip"
 	},
 	"app": {
 		"name": "GitButler",
-		"welcome": "Welcome to GitButler",
+		"welcome": "Welcome to GitButler!",
 		"description": "A Git client for productive developers"
+	},
+	"welcome": {
+		"add_local_project": "Add local project",
+		"should_be_git_repo": "Should be a valid git repository",
+		"clone_repository": "Clone repository",
+		"clone_repo_url": "Clone a repo using a URL",
+		"quick_start": "Quick start",
+		"join_community": "Join our community",
+		"gitbutler_docs": "GitButler docs",
+		"watch_tutorials": "Watch tutorials"
+	},
+	"navigation": {
+		"workspace": "Workspace",
+		"branches": "Branches",
+		"history": "History",
+		"projects": "Projects",
+		"switch_to_workspace": "Switch to Workspace",
+		"toggle_sidebar": "Toggle Sidebar"
 	},
 	"branches": {
 		"title": "Branches",
@@ -29,7 +57,8 @@
 		"switch": "Switch Branch",
 		"merge": "Merge Branch",
 		"current": "Current Branch",
-		"no_branches": "No branches found"
+		"no_branches": "No branches found",
+		"unapplied": "Unapplied"
 	},
 	"commits": {
 		"title": "Commits",
@@ -47,10 +76,13 @@
 		"no_changes": "No changes to commit",
 		"staged": "Staged",
 		"unstaged": "Unstaged",
-		"untracked": "Untracked"
+		"untracked": "Untracked",
+		"discard_changes": "Discard Changes"
 	},
 	"settings": {
 		"title": "Settings",
+		"global": "Global settings",
+		"project": "Project settings",
 		"general": "General",
 		"appearance": "Appearance",
 		"keybindings": "Keybindings",
@@ -59,6 +91,19 @@
 		"theme": "Theme",
 		"theme_light": "Light",
 		"theme_dark": "Dark",
-		"theme_system": "System"
+		"theme_system": "System",
+		"lanes_and_branches": "Lanes & branches",
+		"git_stuff": "Git stuff",
+		"integrations": "Integrations",
+		"ai_options": "AI Options",
+		"telemetry": "Telemetry",
+		"experimental": "Experimental",
+		"organizations": "Organizations",
+		"our_discord": "Our Discord"
+	},
+	"workspace": {
+		"title": "Workspace",
+		"no_virtual_branches": "No virtual branches",
+		"create_branch": "Create Branch"
 	}
 }

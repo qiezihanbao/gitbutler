@@ -5,6 +5,7 @@ import { showError } from '$lib/notifications/toasts';
 import { polyfillAbortSignalTimeout } from '$lib/polyfills/abortSignal';
 import { captureException } from '@sentry/sveltekit';
 import type { HandleClientError } from '@sveltejs/kit';
+import './lib/i18n/i18n';
 
 // Apply polyfills before any code runs
 polyfillAbortSignalTimeout();

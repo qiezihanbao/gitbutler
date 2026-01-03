@@ -18,6 +18,7 @@
 	import { inject } from '@gitbutler/core/context';
 	import { Button, ContextMenu, ContextMenuItem, ContextMenuSection, TestId } from '@gitbutler/ui';
 	import { focusable } from '@gitbutler/ui/focus/focusable';
+	import { t } from '$lib/i18n/i18n';
 
 	import { slide } from 'svelte/transition';
 
@@ -44,7 +45,7 @@
 				width={34}
 				hotkey="⌘1"
 				class={['btn-square', isWorkspacePath() && 'btn-active']}
-				tooltip="Workspace"
+				tooltip={$t('navigation.workspace')}
 				{disabled}
 			>
 				{#snippet custom()}
@@ -82,7 +83,7 @@
 				width={34}
 				class={['btn-square', isBranchesPath() && 'btn-active']}
 				hotkey="⌘2"
-				tooltip="Branches"
+				tooltip={$t('navigation.branches')}
 				{disabled}
 			>
 				{#snippet custom()}
@@ -144,7 +145,7 @@
 				width={34}
 				class={['btn-square', isHistoryPath() && 'btn-active']}
 				hotkey="⌘3"
-				tooltip="Operations history"
+				tooltip={$t('navigation.history')}
 				{disabled}
 			>
 				{#snippet custom()}
@@ -187,7 +188,7 @@
 					icon="chat"
 					width={34}
 					class={['btn-square', isIrcPath() && 'btn-active']}
-					tooltip="History"
+					tooltip={$t('navigation.history')}
 					{disabled}
 				/>
 			</div>
@@ -206,7 +207,7 @@
 					class="btn-square"
 					tooltipPosition="top"
 					tooltipAlign="start"
-					tooltip="Project settings"
+					tooltip={$t('settings.project')}
 				>
 					{#snippet custom()}
 						<svg
@@ -257,7 +258,7 @@
 >
 	<ContextMenuSection>
 		<ContextMenuItem
-			label="Global settings"
+			label={$t('settings.global')}
 			onclick={() => {
 				openGeneralSettings();
 				contextMenuEl?.close();
@@ -267,7 +268,7 @@
 	</ContextMenuSection>
 	<ContextMenuSection title="Theme (⌘T)">
 		<ContextMenuItem
-			label="Dark"
+			label={$t('settings.theme_dark')}
 			onclick={async () => {
 				userSettings.update((s) => ({
 					...s,
@@ -277,7 +278,7 @@
 			}}
 		/>
 		<ContextMenuItem
-			label="Light"
+			label={$t('settings.theme_light')}
 			onclick={async () => {
 				userSettings.update((s) => ({
 					...s,
@@ -287,7 +288,7 @@
 			}}
 		/>
 		<ContextMenuItem
-			label="System"
+			label={$t('settings.theme_system')}
 			onclick={async () => {
 				userSettings.update((s) => ({
 					...s,

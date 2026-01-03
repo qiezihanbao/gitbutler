@@ -16,6 +16,7 @@
 	import { Icon } from '@gitbutler/ui';
 	import iconsJson from '@gitbutler/ui/data/icons.json';
 	import type { GeneralSettingsModalState } from '$lib/state/uiState.svelte';
+	import { t } from '$lib/i18n/i18n';
 
 	type Props = {
 		data: GeneralSettingsModalState;
@@ -30,47 +31,47 @@
 	const pages = [
 		{
 			id: 'general',
-			label: 'General',
+			label: $t('settings.general'),
 			icon: 'settings' as keyof typeof iconsJson
 		},
 		{
 			id: 'appearance',
-			label: 'Appearance',
+			label: $t('settings.appearance'),
 			icon: 'appearance' as keyof typeof iconsJson
 		},
 		{
 			id: 'lanes-and-branches',
-			label: 'Lanes & branches',
+			label: $t('settings.lanes_and_branches'),
 			icon: 'lanes' as keyof typeof iconsJson
 		},
 		{
 			id: 'git',
-			label: 'Git stuff',
+			label: $t('settings.git_stuff'),
 			icon: 'git' as keyof typeof iconsJson
 		},
 		{
 			id: 'integrations',
-			label: 'Integrations',
+			label: $t('settings.integrations'),
 			icon: 'integrations' as keyof typeof iconsJson
 		},
 		{
 			id: 'ai',
-			label: 'AI Options',
+			label: $t('settings.ai_options'),
 			icon: 'ai' as keyof typeof iconsJson
 		},
 		{
 			id: 'telemetry',
-			label: 'Telemetry',
+			label: $t('settings.telemetry'),
 			icon: 'stat' as keyof typeof iconsJson
 		},
 		{
 			id: 'experimental',
-			label: 'Experimental',
+			label: $t('settings.experimental'),
 			icon: 'idea' as keyof typeof iconsJson
 		},
 		{
 			id: 'organizations',
-			label: 'Organizations',
+			label: $t('settings.organizations'),
 			icon: 'idea' as keyof typeof iconsJson,
 			adminOnly: true
 		}
@@ -84,7 +85,7 @@
 </script>
 
 <SettingsModalLayout
-	title="Global settings"
+	title={$t('settings.global')}
 	{pages}
 	selectedId={data.selectedId}
 	isAdmin={$user?.role === 'admin'}
@@ -126,7 +127,7 @@
 				onclick={async () => await urlService.openExternalUrl('https://docs.gitbutler.com/')}
 			>
 				<Icon name="docs" />
-				<span class="text-13 text-bold">Docs</span>
+				<span class="text-13 text-bold">{$t('common.docs')}</span>
 				<div class="text-13 open-link-icon">↗</div>
 			</button>
 			<button
@@ -135,7 +136,7 @@
 				onclick={async () => await urlService.openExternalUrl('https://discord.gg/MmFkmaJ42D')}
 			>
 				<Icon name="discord" />
-				<span class="text-13 text-bold">Our Discord</span>
+				<span class="text-13 text-bold">{$t('settings.our_discord')}</span>
 				<div class="text-13 open-link-icon">↗</div>
 			</button>
 		</div>

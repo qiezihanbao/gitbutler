@@ -10,6 +10,7 @@
 	import { PROJECTS_SERVICE } from '$lib/project/projectsService';
 	import { inject } from '@gitbutler/core/context';
 	import { TestId } from '@gitbutler/ui';
+	import { t } from '$lib/i18n/i18n';
 
 	const projectsService = inject(PROJECTS_SERVICE);
 	const posthog = inject(POSTHOG_WRAPPER);
@@ -40,7 +41,7 @@
 </script>
 
 <div class="welcome" data-testid={TestId.WelcomePage}>
-	<h1 class="welcome-title text-serif-42">Welcome to GitButler!</h1>
+	<h1 class="welcome-title text-serif-42">{$t('app.welcome')}</h1>
 	<div class="welcome__actions">
 		<div class="welcome__actions--repo">
 			<input
@@ -50,7 +51,7 @@
 				data-testid="test-directory-path"
 			/>
 			<WelcomeAction
-				title="Add local project"
+				title={$t('welcome.add_local_project')}
 				loading={newProjectLoading}
 				onclick={onNewProject}
 				dimMessage
@@ -60,15 +61,15 @@
 					{@html newProjectSvg}
 				{/snippet}
 				{#snippet message()}
-					Should be a valid git repository
+					{$t('welcome.should_be_git_repo')}
 				{/snippet}
 			</WelcomeAction>
-			<WelcomeAction title="Clone repository" onclick={onCloneProject} dimMessage>
+			<WelcomeAction title={$t('welcome.clone_repository')} onclick={onCloneProject} dimMessage>
 				{#snippet icon()}
 					{@html cloneRepoSvg}
 				{/snippet}
 				{#snippet message()}
-					Clone a repo using a URL
+					{$t('welcome.clone_repo_url')}
 				{/snippet}
 			</WelcomeAction>
 		</div>
@@ -78,21 +79,21 @@
 
 	<div class="links">
 		<div class="links__section">
-			<p class="links__title text-14 text-bold">Quick start</p>
+			<p class="links__title text-14 text-bold">{$t('welcome.quick_start')}</p>
 			<div class="education-links">
 				<IconLink
 					icon="docs"
 					href="https://docs.gitbutler.com/features/virtual-branches/branch-lanes"
 				>
-					GitButler docs
+					{$t('welcome.gitbutler_docs')}
 				</IconLink>
 				<IconLink icon="video" href="https://www.youtube.com/@gitbutlerapp">
-					Watch tutorials
+					{$t('welcome.watch_tutorials')}
 				</IconLink>
 			</div>
 		</div>
 		<div class="links__section">
-			<p class="links__title text-14 text-bold">Join our community</p>
+			<p class="links__title text-14 text-bold">{$t('welcome.join_community')}</p>
 			<div class="community-links">
 				<IconLink icon="discord" href="https://discord.gg/MmFkmaJ42D">Discord</IconLink>
 				<IconLink icon="bluesky" href="https://bsky.app/profile/gitbutler.com">Bluesky</IconLink>

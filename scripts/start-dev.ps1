@@ -1,50 +1,74 @@
-# GitButler 开发环境启动脚本
-# 用于在 Windows 上启动 GitButler 开发服务器
-
-# 设置工作目录
+﻿# 设置工作目录
 Set-Location "D:\Git\gitbutler"
 
-# 1. 检查端口占用
-Write-Host "=== 检查端口 1420 占用情况 ==="
-netstat -ano | findstr :1420
-
-# 2. 如果有占用，结束进程（把 <PID> 替换为实际的进程ID）
-# $port = netstat -ano | findstr :1420
-# if ($port) {
-#     $pid = ($port -split '\s+')[-1]
-#     Write-Host "结束占用端口的进程 PID: $pid"
-#     taskkill /PID $pid /F
-# }
-
-# 3. 启用 corepack
+# 1. 启用 corepack
 Write-Host "=== 启用 corepack ==="
 corepack enable
 
-# 4. 清理并重新安装依赖
-Write-Host "=== 清理并重新安装依赖 ==="
+# 2. 检查并结束占用端口的进程
+Write-Host "=== 检查端口 1420 占用情况 ==="
+$portProcess = netstat -ano | findstr :1420
+if ($portProcess) {
+    Write-Host "端口 1420 被占用："
+    $portProcess
+    $pid = ($portProcess -split '\s+')[-1]
+    Write-Host "结束进程 PID: $pid"
+    taskkill /PID $pid /F
+    Start-Sleep -Seconds 2
+}
+
+# 3. 清理缓存
+Write-Host "=== 清理缓存 ==="
 Remove-Item -Path ".turbo" -Recurse -Force -ErrorAction SilentlyContinue
-Remove-Item -Path "node_modules" -Recurse -Force -ErrorAction SilentlyContinue
+
+# 4. 重新安装依赖
+Write-Host "=== 重新安装依赖 ==="
 pnpm install
 
-# 5. 分步启动 - 先启动前端
+# 5. 启动前端并捕获输出
 Write-Host "=== 启动前端开发服务器 ==="
-Start-Process -FilePath "pnpm" -ArgumentList "dev:internal-tauri" -PassThru
+$frontendJob = Start-Job -ScriptBlock {
+    Set-Location "D:\Git\gitbutler"
+    $env:VITE_BUTLER_PORT = "6978"
+    $env:VITE_BUTLER_HOST = "localhost"
+    $env:VITE_BUILD_TARGET = "web"
+    pnpm --filter @gitbutler/desktop dev
+}
 
-# 6. 等待前端启动（等待15秒）
-Write-Host "等待前端服务器启动..."
-Start-Sleep -Seconds 15
+# 6. 等待并检查输出
+Write-Host "等待前端启动（30秒）..."
+for ($i = 1; $i -le 30; $i++) {
+    Start-Sleep -Seconds 1
+    $jobOutput = Receive-Job -Job $frontendJob -ErrorAction SilentlyContinue
+    if ($jobOutput) {
+        Write-Host $jobOutput
+    }
+    
+    # 检查端口是否被监听
+    $portStatus = netstat -ano | findstr ":1420"
+    if ($portStatus -and $portStatus -match "LISTENING") {
+        Write-Host "前端服务已启动成功 ✓"
+        break
+    }
+    
+    Write-Host "等待中... $i/30 秒"
+}
 
-# 7. 检查前端是否启动成功
-Write-Host "=== 检查前端服务状态 ==="
-$frontendCheck = netstat -ano | findstr :1420
-
-if ($frontendCheck) {
-    Write-Host "前端服务已启动 ✓"
-
-    # 8. 启动 Tauri 桌面应用
+# 7. 最终检查
+$finalCheck = netstat -ano | findstr ":1420"
+if ($finalCheck) {
+    Write-Host "=== 前端服务状态 ==="
+    $finalCheck
+    
+    # 8. 启动 Tauri
     Write-Host "=== 启动 Tauri 桌面应用 ==="
+    Stop-Job -Job $frontendJob
+    Remove-Job -Job $frontendJob
     pnpm tauri dev
 } else {
-    Write-Host "前端服务启动失败 ✗"
-    Write-Host "请检查上面的错误信息"
+    Write-Host "=== 前端启动失败，获取详细错误信息 ==="
+    $errorOutput = Receive-Job -Job $frontendJob -ErrorAction Continue
+    Write-Host $errorOutput
+    Stop-Job -Job $frontendJob
+    Remove-Job -Job $frontendJob
 }
