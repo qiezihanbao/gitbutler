@@ -8,9 +8,9 @@
 	import { SETTINGS_SERVICE } from '$lib/config/appSettingsV2';
 	import { projectDisableCodegen } from '$lib/config/config';
 	import { ircEnabled } from '$lib/config/uiFeatureFlags';
-	import { IRC_SERVICE } from '$lib/irc/ircService.svelte';
 	import { t, locale } from '$lib/i18n/i18n';
 	import { toggleLocale, getLocaleName, type SupportedLocale } from '$lib/i18n/languageService';
+	import { IRC_SERVICE } from '$lib/irc/ircService.svelte';
 	import { MODE_SERVICE } from '$lib/mode/modeService';
 	import { handleAddProjectOutcome } from '$lib/project/project';
 	import { PROJECTS_SERVICE } from '$lib/project/projectsService';
@@ -109,7 +109,7 @@
 	const localeIcon = $derived(currentLocale === 'zh' ? '🇨🇳' : '🇺🇸');
 
 	function handleLanguageSwitch() {
-		const newLocale = toggleLocale();
+		toggleLocale();
 		// Reload the page to apply the new locale
 		location.reload();
 	}

@@ -17,7 +17,6 @@
 	import ToastController from '$components/ToastController.svelte';
 	import ToggleSidebarMenuAction from '$components/ToggleSidebarMenuAction.svelte';
 	import ZoomInOutMenuAction from '$components/ZoomInOutMenuAction.svelte';
-	import { buildI18nMenu } from '$lib/menu/menuService.svelte';
 	import { POSTHOG_WRAPPER } from '$lib/analytics/posthog';
 	import { initDependencies } from '$lib/bootstrap/deps';
 	import { MessageQueueProcessor } from '$lib/codegen/messageQueue.svelte';
@@ -26,6 +25,7 @@
 	import { ircEnabled, ircServer, fModeEnabled } from '$lib/config/uiFeatureFlags';
 	import { IRC_CLIENT } from '$lib/irc/ircClient.svelte';
 	import { IRC_SERVICE } from '$lib/irc/ircService.svelte';
+	import { buildI18nMenu } from '$lib/menu/menuService';
 	import { PROJECTS_SERVICE } from '$lib/project/projectsService';
 	import { FILE_SELECTION_MANAGER } from '$lib/selection/fileSelectionManager.svelte';
 	import { SHORTCUT_SERVICE } from '$lib/shortcuts/shortcutService';
