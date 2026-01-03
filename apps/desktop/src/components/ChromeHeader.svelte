@@ -9,6 +9,8 @@
 	import { projectDisableCodegen } from '$lib/config/config';
 	import { ircEnabled } from '$lib/config/uiFeatureFlags';
 	import { IRC_SERVICE } from '$lib/irc/ircService.svelte';
+	import { t, locale } from '$lib/i18n/i18n';
+	import { toggleLocale, getLocaleName, type SupportedLocale } from '$lib/i18n/languageService';
 	import { MODE_SERVICE } from '$lib/mode/modeService';
 	import { handleAddProjectOutcome } from '$lib/project/project';
 	import { PROJECTS_SERVICE } from '$lib/project/projectsService';
@@ -101,6 +103,17 @@
 
 	const isOnWorkspacePage = $derived(!!isWorkspacePath());
 
+	// Language switcher
+	const currentLocale = $derived(locale.get() as SupportedLocale);
+	const localeDisplay = $derived(getLocaleName(currentLocale));
+	const localeIcon = $derived(currentLocale === 'zh' ? '🇨🇳' : '🇺🇸');
+
+	function handleLanguageSwitch() {
+		const newLocale = toggleLocale();
+		// Reload the page to apply the new locale
+		location.reload();
+	}
+
 	function openModal() {
 		modal?.show();
 	}
@@ -140,7 +153,7 @@
 			{:else}
 				<div class="chrome-you-are-up-to-date">
 					<Icon name="tick-small" />
-					<span class="text-12">You’re up to date</span>
+					<span class="text-12">{$t('time.up_to_date')}</span>
 				</div>
 			{/if}
 		</div>
@@ -253,6 +266,21 @@
 	</div>
 
 	<div class="chrome-right" data-tauri-drag-region={useCustomTitleBar}>
+		<Tooltip text={$t('settings.language')} position="bottom" align="end">
+			<Button
+				testId={TestId.ChromeHeaderLanguageSwitcher}
+				kind="outline"
+				reversedDirection
+				onclick={handleLanguageSwitch}
+			>
+				{#snippet custom()}
+					<div class="language-switcher">
+						<span class="language-icon">{localeIcon}</span>
+						<span class="language-text">{$localeDisplay}</span>
+					</div>
+				{/snippet}
+			</Button>
+		</Tooltip>
 		{#if $ircEnabled}
 			<NotificationButton
 				hasUnread={isNotificationsUnread}
@@ -381,5 +409,22 @@
 		padding: 0 4px;
 		gap: 4px;
 		color: var(--clr-text-2);
+	}
+
+	.language-switcher {
+		display: flex;
+		align-items: center;
+		gap: 6px;
+	}
+
+	.language-icon {
+		font-size: 14px;
+		line-height: 1;
+	}
+
+	.language-text {
+		font-size: 12px;
+		font-weight: 600;
+		text-transform: uppercase;
 	}
 </style>

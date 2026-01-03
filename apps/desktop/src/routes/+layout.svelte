@@ -17,6 +17,7 @@
 	import ToastController from '$components/ToastController.svelte';
 	import ToggleSidebarMenuAction from '$components/ToggleSidebarMenuAction.svelte';
 	import ZoomInOutMenuAction from '$components/ZoomInOutMenuAction.svelte';
+	import { buildI18nMenu } from '$lib/menu/menuService.svelte';
 	import { POSTHOG_WRAPPER } from '$lib/analytics/posthog';
 	import { initDependencies } from '$lib/bootstrap/deps';
 	import { MessageQueueProcessor } from '$lib/codegen/messageQueue.svelte';
@@ -47,6 +48,13 @@
 
 	const { backend } = data;
 	initDependencies(data);
+
+	// Build i18n menu on startup
+	if (browser) {
+		buildI18nMenu().catch((err) => {
+			console.error('Failed to build i18n menu:', err);
+		});
+	}
 
 	new MessageQueueProcessor();
 

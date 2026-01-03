@@ -18,6 +18,7 @@
 	import { RULES_SERVICE, workspaceRulesSelectors } from '$lib/rules/rulesService.svelte';
 	import { getStackName } from '$lib/stacks/stack';
 	import { STACK_SERVICE } from '$lib/stacks/stackService.svelte';
+	import { t } from '$lib/i18n/i18n';
 	import { typedKeys } from '$lib/utils/object';
 	import { inject } from '@gitbutler/core/context';
 	import {
@@ -92,7 +93,7 @@
 
 	function openRuleEditor() {
 		if (editingRuleId !== null) {
-			chipToasts.error('Please finish editing the current rule first');
+			chipToasts.error($t('rules.finish_editing'));
 			return;
 		}
 		// Open drawer if it's collapsed
@@ -137,17 +138,17 @@
 
 	async function editExistingRule(rule: WorkspaceRule) {
 		if (mode === 'add' || (editingRuleId !== null && editingRuleId !== rule.id)) {
-			chipToasts.error('Please finish editing the current rule first');
+			chipToasts.error($t('rules.finish_editing'));
 			return;
 		}
 
 		if (rule.action.type === 'implicit') {
-			chipToasts.error('Cannot edit implicit rules');
+			chipToasts.error($t('rules.cannot_edit_implicit'));
 			return;
 		}
 
 		if (rule.action.subject.type !== 'assign') {
-			chipToasts.error('Cannot edit rules that are not branch assignments');
+			chipToasts.error($t('rules.cannot_edit_non_assignment'));
 			return;
 		}
 
@@ -172,12 +173,12 @@
 		const ruleFilters = ruleFiltersEditor ? ruleFiltersEditor.getRuleFilters() : [];
 
 		if (ruleFilters === undefined) {
-			chipToasts.error('Invalid rule filters');
+			chipToasts.error($t('rules.invalid_filters'));
 			return;
 		}
 
 		if (!stackTargetSelected) {
-			chipToasts.error('Please select a branch to assign the rule');
+			chipToasts.error($t('rules.select_branch'));
 			return;
 		}
 
@@ -248,7 +249,7 @@
 	defaultCollapsed={true}
 >
 	{#snippet header()}
-		<h4 class="text-14 text-semibold truncate">Rules</h4>
+		<h4 class="text-14 text-semibold truncate">{$t('rules.title')}</h4>
 		{#if rules.result.isSuccess}
 			<Badge>{rules.result.data.ids.length}</Badge>
 		{:else}
@@ -332,15 +333,15 @@
 			{:else}
 				<div class="rules-placeholder">
 					<p class="text-13 text-body rules-placeholder-text">
-						Let rules automatically sort your changes.
+						{$t('rules.let_rules_sort')}
 						<Link
 							href="https://docs.gitbutler.com/features/branch-management/rules"
 							class="underline-dotted clr-text-2"
 						>
-							Read the docs
+							{$t('rules.read_docs')}
 						</Link> or set up your
 						<button type="button" class="underline-dotted clr-text-2" onclick={openRuleEditor}>
-							first rule
+							{$t('rules.setup_first_rule')}
 						</button> +
 					</p>
 				</div>
@@ -353,7 +354,7 @@
 	{@const stackEntries = stackService.stacks(projectId)}
 	<div class="rules-list__editor-content">
 		<div class="rules-list__action">
-			<h3 class="text-13 text-semibold">Assign to branch</h3>
+			<h3 class="text-13 text-semibold">{$t('rules.assign_to_branch')}</h3>
 			<ReduxResult {projectId} result={stackEntries.result}>
 				{#snippet children(stacks)}
 					{@const stackOptions = [
@@ -369,11 +370,11 @@
 							.filter(isDefined),
 						{ separator: true } as const,
 						{
-							label: 'Leftmost lane',
+							label: $t('rules.leftmost_lane'),
 							value: encodeStackTarget({ type: 'leftmost' })
 						},
 						{
-							label: 'Rightmost lane',
+							label: $t('rules.rightmost_lane'),
 							value: encodeStackTarget({ type: 'rightmost' })
 						}
 					]}
@@ -432,10 +433,10 @@
 			</div>
 		{:else}
 			<div class="rules-list__matches-all">
-				<p class="text-13">Matches all changes</p>
+				<p class="text-13">{$t('rules.matches_all_changes')}</p>
 				<div bind:this={addFilterButton} class="rules-list__add-filter-button text-12">
 					<button type="button" onclick={openAddFilterContextMenu}>
-						<span class="clr-text-1 underline-dotted"> Add filter +</span>
+						<span class="clr-text-1 underline-dotted"> {$t('rules.add_filter')}</span>
 					</button>
 				</div>
 			</div>
@@ -444,7 +445,7 @@
 		<Spacer margin={2} dotted />
 
 		<div class="rules-list__editor-buttons">
-			<Button onclick={cancelRuleEdition} kind="outline">Cancel</Button>
+			<Button onclick={cancelRuleEdition} kind="outline">{$t('common.cancel')}</Button>
 			<Button
 				onclick={saveRule}
 				kind="solid"
@@ -453,7 +454,7 @@
 				disabled={!canSaveRule}
 				loading={stackEntries.result.isLoading ||
 					creatingRule.current.isLoading ||
-					updatingRule.current.isLoading}>Save rule</Button
+					updatingRule.current.isLoading}>{$t('rules.save_rule')}</Button
 			>
 		</div>
 	</div>

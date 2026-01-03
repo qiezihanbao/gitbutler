@@ -14,6 +14,7 @@
 	import { DEFAULT_FORGE_FACTORY } from '$lib/forge/forgeFactory.svelte';
 	import { STACK_SERVICE } from '$lib/stacks/stackService.svelte';
 	import { UI_STATE } from '$lib/state/uiState.svelte';
+	import { t } from '$lib/i18n/i18n';
 	import { inject } from '@gitbutler/core/context';
 	import { ReviewBadge, TestId } from '@gitbutler/ui';
 	import { getTimeAgo } from '@gitbutler/ui/utils/timeAgo';
@@ -169,10 +170,10 @@
 			{#snippet overlay({ hovered, activated, handler })}
 				{@const label =
 					handler instanceof MoveCommitDzHandler
-						? 'Move here'
+						? $t('branches.move_here')
 						: handler instanceof ReorderCommitDzHandler
-							? 'Reorder here'
-							: 'Start commit'}
+							? $t('branches.reorder_here')
+							: $t('commits.start_commit')}
 				<CardOverlay {hovered} {activated} {label} />
 			{/snippet}
 

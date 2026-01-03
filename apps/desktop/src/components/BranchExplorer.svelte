@@ -123,14 +123,14 @@
 	const filterOptions = $derived.by<Partial<Record<BranchFilterOption, string>>>(() => {
 		if (forge.current.listService) {
 			return {
-				all: 'All',
-				pullRequest: 'PRs',
-				local: 'Local'
+				all: $t('branches.all'),
+				pullRequest: $t('branches.pull_requests'),
+				local: $t('branches.local')
 			};
 		} else {
 			return {
-				all: 'All',
-				local: 'Local'
+				all: $t('branches.all'),
+				local: $t('branches.local')
 			};
 		}
 	});
@@ -180,7 +180,7 @@
 	<div class="branches__header">
 		<div class="branches__header-info">
 			<div class="branches-title" class:hide-branch-title={searching}>
-				<span class="text-14 text-bold">Branches</span>
+				<span class="text-14 text-bold">{$t('branches.title')}</span>
 
 				<Badge>{combined.length}</Badge>
 			</div>
@@ -200,7 +200,7 @@
 					oninput={debounceSearchInput}
 					class="search-input text-13"
 					type="text"
-					placeholder="Search branches"
+					placeholder={$t('branches.search_placeholder')}
 					onkeydown={handleSearchKeyDown}
 				/>
 			</div>
@@ -224,10 +224,10 @@
 							{/each}
 						</div>
 					{:else}
-						{@render branchGroup({ title: 'Applied', children: groupedBranches.applied })}
+						{@render branchGroup({ title: $t('branches.applied'), children: groupedBranches.applied })}
 
 						{#if groupedBranches.authored.length > 0}
-							{@render branchGroup({ title: 'Mine', children: groupedBranches.authored })}
+							{@render branchGroup({ title: $t('branches.mine'), children: groupedBranches.authored })}
 						{/if}
 
 						{#if groupedBranches.review.length > 0}

@@ -3,6 +3,7 @@
 	import { type BranchListing, BranchListingDetails } from '$lib/branches/branchListing';
 	import { BRANCH_SERVICE } from '$lib/branches/branchService.svelte';
 	import { GIT_CONFIG_SERVICE } from '$lib/config/gitConfigService';
+	import { t } from '$lib/i18n/i18n';
 	import { USER_SERVICE } from '$lib/user/userService';
 	import { inject } from '@gitbutler/core/context';
 
@@ -115,7 +116,7 @@
 			<SeriesLabelsRow fontSize="13" series={filteredStackBranches} />
 			{#if branchListing.stack?.inWorkspace}
 				<div class="sidebar-entry__applied-tag">
-					<span class="text-10 text-semibold">Workspace</span>
+					<span class="text-10 text-semibold">{$t('branches.workspace_tag')}</span>
 				</div>
 			{/if}
 		</div>
@@ -141,12 +142,12 @@
 				<span class="sidebar-entry__divider">•</span>
 			{/each}
 			{#if branchListing.hasLocal}
-				<span>local</span>
+				<span>{$t('branches.local')}</span>
 				<span class="sidebar-entry__divider">•</span>
 			{/if}
 			{#if branchListing.remotes.length === 0 && !branchListing.hasLocal}
 				<span class="sidebar-entry__divider">•</span>
-				<span>No remotes</span>
+				<span>{$t('branches.no_remotes')}</span>
 			{/if}
 		</div>
 	{/snippet}
@@ -155,7 +156,7 @@
 			<span class="truncate">
 				{#if lastCommitDetails}
 					<TimeAgo date={lastCommitDetails.lastCommitAt} addSuffix />
-					by {lastCommitDetails.authorName}
+					{$t('branches.by_author')} {lastCommitDetails.authorName}
 				{/if}
 			</span>
 

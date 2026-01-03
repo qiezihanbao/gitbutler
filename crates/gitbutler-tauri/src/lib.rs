@@ -21,6 +21,7 @@ pub mod claude;
 
 pub mod logs;
 pub mod menu;
+pub mod i18n_menu;
 pub mod window;
 pub use window::state::{WindowState, event::ChangeForFrontend};
 

@@ -237,7 +237,7 @@
 			<Button
 				icon="mail"
 				kind="ghost"
-				tooltip="Share feedback"
+				tooltip={$t('settings.share_feedback')}
 				tooltipPosition="top"
 				tooltipAlign="start"
 				width={34}
@@ -266,7 +266,7 @@
 			keyboardShortcut="⌘,"
 		/>
 	</ContextMenuSection>
-	<ContextMenuSection title="Theme (⌘T)">
+	<ContextMenuSection title={$t('settings.theme_shortcut')}>
 		<ContextMenuItem
 			label={$t('settings.theme_dark')}
 			onclick={async () => {

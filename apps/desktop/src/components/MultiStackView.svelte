@@ -14,6 +14,7 @@
 		onDragOver
 	} from '$lib/dragging/reordering';
 	import { WorkspaceAutoPanner } from '$lib/dragging/workspaceAutoPanner';
+	import { t } from '$lib/i18n/i18n';
 	import { branchesPath } from '$lib/routes/routes.svelte';
 	import { type SelectionId } from '$lib/selection/key';
 	import { STACK_SERVICE } from '$lib/stacks/stackService.svelte';
@@ -254,18 +255,18 @@
 		>
 			{#snippet title()}
 				{#if stacks.length === 0}
-					No branches in Workspace
+					{$t('workspace.no_branches_in_workspace')}
 				{/if}
 			{/snippet}
 			{#snippet description()}
 				{#if stacks.length === 0}
-					Drop files to start a branch,
+					{$t('commits.drop_files_to_start')},
 					<br />
-					apply from the
+					{$t('workspace.apply_from_branches_view')}
 					<a
 						class="pointer-events underline-dotted clr-text-2 link-hover-2"
 						aria-label="Branches view"
-						href={branchesPath(projectId)}>branches view</a
+						href={branchesPath(projectId)}>{$t('workspace.branches_view')}</a
 					>
 					↗
 					<br />
@@ -273,16 +274,16 @@
 					<button
 						type="button"
 						class="underline-dotted pointer-events clr-text-2 link-hover-2"
-						onclick={() => createBranchModal?.show()}>create a new branch</button
+						onclick={() => createBranchModal?.show()}>{$t('workspace.create_a_new_branch')}</button
 					> +
 				{:else}
-					Drop files to start a branch,
+					{$t('commits.drop_files_to_start')},
 					<br />
 					or
 					<button
 						type="button"
 						class="underline-dotted pointer-events clr-text-2 link-hover-2"
-						onclick={() => createBranchModal?.show()}>create a new branch</button
+						onclick={() => createBranchModal?.show()}>{$t('workspace.create_a_new_branch')}</button
 					> +
 				{/if}
 			{/snippet}

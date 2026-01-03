@@ -32,6 +32,7 @@
 	import { HOOKS_SERVICE } from '$lib/hooks/hooksService';
 	import { DIFF_SERVICE } from '$lib/hunks/diffService.svelte';
 	import { RULES_SERVICE } from '$lib/rules/rulesService.svelte';
+	import { t } from '$lib/i18n/i18n';
 	import { FILE_SELECTION_MANAGER } from '$lib/selection/fileSelectionManager.svelte';
 	import {
 		createBranchSelection,
@@ -608,7 +609,7 @@
 										{#if !isCommitting}
 											<div class="assigned-changes-empty">
 												<p class="text-12 text-body assigned-changes-empty__text">
-													Drop files to assign or commit directly
+													{$t('commits.drop_files')}
 												</p>
 											</div>
 										{/if}
@@ -633,7 +634,7 @@
 												if (defaultBranch) startCommit(defaultBranch);
 											}}
 										>
-											Start a commit…
+											{$t('commits.start_commit_with_ellipsis')}
 										</Button>
 									</div>
 								{:else if isCommitting}
