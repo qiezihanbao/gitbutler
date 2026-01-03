@@ -1,0 +1,64 @@
+{
+	"common": {
+		"loading": "Loading...",
+		"save": "Save",
+		"cancel": "Cancel",
+		"delete": "Delete",
+		"edit": "Edit",
+		"confirm": "Confirm",
+		"close": "Close",
+		"search": "Search",
+		"settings": "Settings",
+		"yes": "Yes",
+		"no": "No",
+		"ok": "OK",
+		"error": "Error",
+		"warning": "Warning",
+		"info": "Information",
+		"success": "Success"
+	},
+	"app": {
+		"name": "GitButler",
+		"welcome": "Welcome to GitButler",
+		"description": "A Git client for productive developers"
+	},
+	"branches": {
+		"title": "Branches",
+		"create": "Create Branch",
+		"delete": "Delete Branch",
+		"switch": "Switch Branch",
+		"merge": "Merge Branch",
+		"current": "Current Branch",
+		"no_branches": "No branches found"
+	},
+	"commits": {
+		"title": "Commits",
+		"commit": "Commit",
+		"amend": "Amend",
+		"push": "Push",
+		"pull": "Pull",
+		"no_commits": "No commits found",
+		"commit_message": "Commit message",
+		"commit_message_placeholder": "Enter commit message..."
+	},
+	"files": {
+		"title": "Files",
+		"changes": "Changes",
+		"no_changes": "No changes to commit",
+		"staged": "Staged",
+		"unstaged": "Unstaged",
+		"untracked": "Untracked"
+	},
+	"settings": {
+		"title": "Settings",
+		"general": "General",
+		"appearance": "Appearance",
+		"keybindings": "Keybindings",
+		"about": "About",
+		"language": "Language",
+		"theme": "Theme",
+		"theme_light": "Light",
+		"theme_dark": "Dark",
+		"theme_system": "System"
+	}
+}

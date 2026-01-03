@@ -92,6 +92,7 @@
 		"openai": "^4.104.0",
 		"reconnecting-websocket": "^4.4.0",
 		"redux-persist": "^6.0.0",
-		"rxjs": "catalog:"
+		"rxjs": "catalog:",
+		"svelte-i18n": "^4.0.1"
 	}
 }

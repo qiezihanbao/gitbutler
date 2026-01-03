@@ -1,0 +1,60 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Build Rust",
+			"type": "shell",
+			"command": "cargo",
+			"args": ["build"],
+			"options": {
+				"cwd": "${workspaceFolder}"
+			},
+			"group": "build",
+			"problemMatcher": ["$rustc"]
+		},
+		{
+			"label": "Install Dependencies",
+			"type": "shell",
+			"command": "pnpm",
+			"args": ["install"],
+			"options": {
+				"cwd": "${workspaceFolder}"
+			},
+			"group": "build",
+			"problemMatcher": []
+		},
+		{
+			"label": "Format All",
+			"type": "shell",
+			"command": "pnpm",
+			"args": ["format"],
+			"options": {
+				"cwd": "${workspaceFolder}"
+			},
+			"group": "none",
+			"problemMatcher": []
+		},
+		{
+			"label": "Lint Check",
+			"type": "shell",
+			"command": "pnpm",
+			"args": ["lint"],
+			"options": {
+				"cwd": "${workspaceFolder}"
+			},
+			"group": "test",
+			"problemMatcher": ["$eslint-stylish"]
+		},
+		{
+			"label": "Run Tests",
+			"type": "shell",
+			"command": "pnpm",
+			"args": ["test"],
+			"options": {
+				"cwd": "${workspaceFolder}"
+			},
+			"group": "test",
+			"problemMatcher": []
+		}
+	]
+}

@@ -3,6 +3,7 @@
 Alrighty, you want to get compiling. We love you already. Your parents raised
 you right. Let's get started.
 
+
 ---
 
 ## Table of Contents
@@ -33,6 +34,7 @@ you right. Let's get started.
 - [Development mode OAuth login](#development-mode-oauth-login)
 - [Joining the GitButler Team](#joining-the-gitbutler-team)
 
+
 ---
 
 ## Overview
@@ -50,6 +52,7 @@ in Typescript for that layer.
 
 For a deep dive into the architecture, see [DEEPWIKI](https://deepwiki.com/gitbutlerapp/gitbutler).
 
+
 ---
 
 ## The Basics
@@ -59,6 +62,7 @@ OK, let's get it running.
 ### Prerequisites
 
 First of all, this is a Tauri app, which uses Rust for the backend and Javascript for the frontend. So let's make sure you have all the prerequisites installed.
+
 
 1. Tauri Dev Deps (https://tauri.app/start/prerequisites/#system-dependencies)
 
@@ -83,6 +87,7 @@ $ sudo apt install libwebkit2gtk-4.1-dev \
 
 </details>
 
+
 2. Rust
 
 For both Mac OS and Linux, you can use the following `rustup` quick install script to get all the necessary tools.
@@ -91,6 +96,7 @@ For both Mac OS and Linux, you can use the following `rustup` quick install scri
 $ cd gitbutler-repo
 $ curl --proto '=https' --tlsv1.2 https://sh.rustup.rs -sSf | sh
 ```
+
 
 3. Node
 
@@ -102,6 +108,7 @@ Alternatively, you can use the following Node installer from Vercel to get the l
 $ curl https://install-node.vercel.app/latest > install_node.sh
 $ sudo ./install_node.sh
 ```
+
 
 4. pnpm
 
@@ -125,7 +132,7 @@ $ pnpm install # This should now ask you to confirm the download, installation, 
 
 You'll have to re-run this occasionally when our deps change.
 
-> [!NOTE]  
+> [!NOTE]\
 > We use [turborepo](https://turbo.build/repo) as our monorepo tooling and by default Vercel collects some [basic telemetry](https://turbo.build/repo/docs/telemetry). If you'd like to disable this, please run `pnpm exec turbo telemetry disable` once in the project's root directory after installing dependencies.
 
 ### Run the app
@@ -168,6 +175,7 @@ $ cargo clippy   # see linting errors
 $ cargo fmt      # format code
 ```
 
+
 ---
 
 ## Debugging
@@ -178,6 +186,7 @@ it is that you're working on.
 ### Logs
 
 The app writes logs into:
+
 
 1. `stdout` in development mode
 2. The Tauri [logs](https://tauri.app/v1/api/js/path/#platform-specific) directory
@@ -196,9 +205,9 @@ GITBUTLER_PERFORMANCE_LOG=1 LOG_LEVEL=debug pnpm tauri dev --release
 
 ### Repository
 
-Often the behaviour depends on the current context: the repository being displayed. Next to _logs_, it's useful to learn how it's structured.
+Often the behaviour depends on the current context: the repository being displayed. Next to *logs*, it's useful to learn how it's structured.
 
-To do that, _launch the application from a terminal_ as shown in the paragraph above this one, or right below, but with `graphviz` installed.
+To do that, *launch the application from a terminal* as shown in the paragraph above this one, or right below, but with `graphviz` installed.
 The `dot` program should be available in `PATH` so it can run from the terminal.
 
 Doing so can look like this on MacOS, for example:
@@ -225,17 +234,21 @@ This will pop open an SVG version of the graph that GitButler uses to create the
 We are also collecting tokio's runtime tracing information that could be viewed using [tokio-console](https://github.com/tokio-rs/console#tokio-console-prototypes):
 
 - development:
+
   ```bash
   $ tokio-console
   ```
 - nightly:
+
   ```bash
   $ tokio-console http://127.0.0.1:6668
   ```
 - production:
+
   ```bash
   $ tokio-console http://127.0.0.1:6667
   ```
+
 
 ---
 
@@ -305,6 +318,7 @@ For issues specific to our toolchain components:
 
 If none of these solutions work, please check our [GitHub Issues](https://github.com/gitbutlerapp/gitbutler/issues) or create a new issue with detailed information about your system and the error you're encountering.
 
+
 ---
 
 ## Building
@@ -353,7 +367,7 @@ after installation, just make sure to restart the terminal after installing).
 
 Note that it might appear that the build has hung or frozen on the `openssl-sys` crate.
 It's not, it's just that Cargo can't report the status of a C/C++ build happening
-under the hood, and openssl is _large_. It'll take a while to compile.
+under the hood, and openssl is *large*. It'll take a while to compile.
 
 #### OpenSSL
 
@@ -381,7 +395,7 @@ which means cross-compilation to x86-64 is required to workaround that. Besides,
 most users will probably still be on INTEL machines, making this capability
 a common requirement.
 
-In a Git `bash`, _with MSVC for x86-64 installed on the system_, run the following
+In a Git `bash`, *with MSVC for x86-64 installed on the system*, run the following
 to prepare the environment.
 
 ```bash
@@ -406,6 +420,7 @@ pnpm tauri dev --features windows --target x86_64-pc-windows-msvc
 Note that it's necessary to repeat the `--target` specification as otherwise the final copy operation doesn't work,
 triggered by `tauri` itself.
 
+
 ---
 
 ## Design
@@ -414,7 +429,8 @@ We use [Figma](https://www.figma.com/) for our design work.
 If you're a designer (and even if you're not), you want to contribute to the
 design of GitButler, or your work involves UI, you could duplicate our design file.
 
-GitButler design: [Figma file](https://www.figma.com/file/FbeLt0yjY9RiNn8MXUXsYs/Client-Design?type=design&node-id=0%3A1&mode=design&t=MUDQhR3iOM3DpI9m-1) 🎨
+GitButler design: [Figma file](https://www.figma.com/file/FbeLt0yjY9RiNn8MXUXsYs/Client-Design?type=design&node-id=0:1&mode=design&t=MUDQhR3iOM3DpI9m-1) 🎨
+
 
 ---
 
@@ -424,12 +440,14 @@ Now that you're up and running, if you want to change something and open a PR
 for us, make sure to read [CONTRIBUTING.md](CONTRIBUTING.md) to make sure you're
 not wasting your time.
 
+
 ---
 
 ## Some Other Random Notes
 
 Most of this is for internal GitButler use, but maybe everyone else will find
 it interesting too.
+
 
 ---
 
@@ -455,7 +473,8 @@ version found at `https://app.gitbutler.com/releases`.
 
 ### Publishing
 
-To publish a version that you've just build, use [Release Manager](https://gitbutler.retool.com/apps/cb9cbed6-ae0a-11ed-918c-736c4335d3af/Release%20Manager).
+To publish a version that you've just build, use [Release Manager](https://gitbutler.retool.com/apps/cb9cbed6-ae0a-11ed-918c-736c4335d3af/Release Manager).
+
 
 ---
 
@@ -466,6 +485,7 @@ By default, you will not be able to log into GitButler using Github/Google becau
 ```
 PUBLIC_API_BASE_URL=https://app.gitbutler.com/
 ```
+
 
 ---
 
@@ -486,3 +506,5 @@ This is a list of crates/modules that we want to eliminate or split into smaller
 - [gitbutler-branch](crates/gitbutler-branch/) (contains `diff` and `branch` contexts due to a cyclic dependency)
 - [gitbutler-url](crates/gitbutler-url/) (this is a huge mess and ideally we need none of it)
 - [gitbutler_repo::config](crates/gitbutler-repo/src/config.rs) (seems like the wrong abstraction)
+
+
