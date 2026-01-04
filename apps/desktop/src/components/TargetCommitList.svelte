@@ -8,9 +8,11 @@
 	import { SETTINGS } from '$lib/settings/userSettings';
 	import { STACK_SERVICE } from '$lib/stacks/stackService.svelte';
 	import { UI_STATE } from '$lib/state/uiState.svelte';
+	import { t } from '$lib/i18n/i18n';
+	import { getTimeAgo } from '$lib/utils/timeAgo';
 	import { inject } from '@gitbutler/core/context';
 
-	import { TestId, TimeAgo } from '@gitbutler/ui';
+	import { TestId } from '@gitbutler/ui';
 	import VirtualList from '@gitbutler/ui/components/VirtualList.svelte';
 	import { getColorFromBranchType } from '@gitbutler/ui/utils/getColorFromBranchType';
 	import { onMount } from 'svelte';
@@ -87,9 +89,9 @@
 				</div>
 
 				<div class="target-branch-header__content-details">
-					<p class="text-12 target-branch-header__caption truncate">Current workspace target</p>
+					<p class="text-12 target-branch-header__caption truncate">{$t('workspace.current_target')}</p>
 					<p class="text-12 target-branch-header__caption">
-						<TimeAgo date={new Date(lastUpdate)} />
+						{getTimeAgo(new Date(lastUpdate))}
 					</p>
 				</div>
 			</div>

@@ -4,6 +4,7 @@
 	import RemoveProjectButton from '$components/RemoveProjectButton.svelte';
 	import { showError } from '$lib/notifications/toasts';
 	import { PROJECTS_SERVICE } from '$lib/project/projectsService';
+	import { t } from '$lib/i18n/i18n';
 	import { useSettingsModal } from '$lib/settings/settingsModal.svelte';
 	import { inject } from '@gitbutler/core/context';
 
@@ -23,10 +24,10 @@
 			await projectsService.deleteProject(projectId);
 			closeSettings();
 			goto('/');
-			chipToasts.success('Project deleted');
+			chipToasts.success($t('settings.project_deleted'));
 		} catch (err: any) {
 			console.error(err);
-			showError('Failed to delete project', err);
+			showError($t('settings.failed_to_delete_project'), err);
 		} finally {
 			isDeleting = false;
 		}
@@ -37,10 +38,10 @@
 	{#snippet children(project)}
 		<CardGroup.Item standalone>
 			{#snippet title()}
-				Remove project
+				{$t('settings.remove_project')}
 			{/snippet}
 			{#snippet caption()}
-				Removing projects only clears configuration — your code stays safe.
+				{$t('settings.remove_project_description')}
 			{/snippet}
 
 			<div>

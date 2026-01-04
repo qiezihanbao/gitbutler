@@ -6,6 +6,7 @@
 	import AgentSettings from '$components/projectSettings/AgentSettings.svelte';
 	import GeneralSettings from '$components/projectSettings/GeneralSettings.svelte';
 	import { projectDisableCodegen } from '$lib/config/config';
+	import { t } from '$lib/i18n/i18n';
 	import iconsJson from '@gitbutler/ui/data/icons.json';
 	import type { ProjectSettingsModalState } from '$lib/state/uiState.svelte';
 
@@ -20,28 +21,28 @@
 	const allPages = [
 		{
 			id: 'project',
-			label: 'Project',
+			label: $t('settings.project'),
 			icon: 'profile' as keyof typeof iconsJson
 		},
 		{
 			id: 'git',
-			label: 'Git stuff',
+			label: $t('settings.git_stuff'),
 			icon: 'git' as keyof typeof iconsJson
 		},
 		{
 			id: 'ai',
-			label: 'AI options',
+			label: $t('settings.ai_options'),
 			icon: 'ai' as keyof typeof iconsJson
 		},
 		{
 			id: 'agent',
-			label: 'Agent',
+			label: $t('codegen.claude_code'),
 			icon: 'ai-agent' as keyof typeof iconsJson,
 			requireCodegen: true
 		},
 		{
 			id: 'experimental',
-			label: 'Experimental',
+			label: $t('settings.experimental'),
 			icon: 'idea' as keyof typeof iconsJson
 		}
 	];
@@ -56,7 +57,7 @@
 </script>
 
 <SettingsModalLayout
-	title="Project settings"
+	title={$t('settings.project')}
 	{pages}
 	selectedId={data.selectedId}
 	onSelectPage={selectPage}
@@ -74,10 +75,10 @@
 			{:else if currentPage.id === 'experimental'}
 				<PreferencesForm projectId={data.projectId} />
 			{:else}
-				Settings page {currentPage.id} not Found.
+				{$t('settings.page_not_found', { pageId: currentPage.id })}
 			{/if}
 		{:else}
-			Settings page {currentSelectedId} not Found.
+			{$t('settings.page_not_found', { pageId: currentSelectedId })}
 		{/if}
 	{/snippet}
 </SettingsModalLayout>

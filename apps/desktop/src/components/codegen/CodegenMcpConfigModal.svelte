@@ -9,6 +9,7 @@
 		ScrollableContainer,
 		Toggle
 	} from '@gitbutler/ui';
+	import { t } from '$lib/i18n/i18n';
 	import type { McpConfig, McpServer } from '$lib/codegen/types';
 
 	type Props = {
@@ -29,27 +30,27 @@
 <Modal
 	bind:this={modal}
 	width={480}
-	title={Object.entries(mcpConfig.mcpServers).length > 0 ? 'MCP server configuration' : undefined}
+	title={Object.entries(mcpConfig.mcpServers).length > 0 ? $t('codegen.mcp_server_configuration') : undefined}
 >
 	<ScrollableContainer>
 		<div class="flex flex-col gap-8">
 			{#if Object.entries(mcpConfig.mcpServers).length === 0}
 				<EmptyStatePlaceholder image={emptyFolderSvg} width={300} topBottomPadding={38}>
 					{#snippet title()}
-						No MCP servers available
+						{$t('codegen.no_mcp_servers_available')}
 					{/snippet}
 					{#snippet caption()}
-						For installing additional MCP servers,<br />check the
+						{$t('codegen.installing_mcp_servers')}<br />
 						<Link href="https://docs.anthropic.com/en/docs/claude-code/mcp#installing-mcp-servers"
-							>Claude Code documentation</Link
+							>{$t('codegen.check_claude_code_documentation')}</Link
 						>
 					{/snippet}
 				</EmptyStatePlaceholder>
 			{:else}
 				<p class="text-12 text-body clr-text-2 m-b-10">
-					Select the MCP Servers for this session. For installing additional MCP servers, check the
+					{$t('codegen.select_mcp_servers')}
 					<Link href="https://docs.anthropic.com/en/docs/claude-code/mcp#installing-mcp-servers"
-						>Claude Code documentation</Link
+						>{$t('codegen.check_claude_code_documentation')}</Link
 					>
 				</p>
 				<CardGroup>

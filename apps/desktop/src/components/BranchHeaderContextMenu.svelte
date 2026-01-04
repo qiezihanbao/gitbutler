@@ -23,6 +23,7 @@
 	import { STACK_SERVICE } from '$lib/stacks/stackService.svelte';
 	import { URL_SERVICE } from '$lib/utils/url';
 	import { inject } from '@gitbutler/core/context';
+	import { t } from '$lib/i18n/i18n';
 	import {
 		ContextMenuItem,
 		ContextMenuItemSubmenu,
@@ -168,7 +169,7 @@
 					/>
 				{/if}
 				<ContextMenuItem
-					label="Copy branch name"
+					label={$t('branches.copy_branch_name')}
 					icon="copy"
 					testId={TestId.BranchHeaderContextMenu_CopyBranchName}
 					onclick={() => {
@@ -180,14 +181,14 @@
 			{#if stackId}
 				<ContextMenuSection>
 					<ContextMenuItemSubmenu
-						label="Create branch"
+						label={$t('branches.create')}
 						icon="new-dep-branch"
 						disabled={isReadOnly || refCreation.current.isLoading}
 					>
 						{#snippet submenu({ close: closeSubmenu })}
 							<ContextMenuSection>
 								<ContextMenuItem
-									label="Create branch above"
+									label={$t('branches.create_branch_above')}
 									testId={TestId.BranchHeaderContextMenu_AddDependentBranch}
 									disabled={isReadOnly}
 									onclick={async () => {
@@ -197,7 +198,7 @@
 									}}
 								/>
 								<ContextMenuItem
-									label="Create branch below"
+									label={$t('branches.create_branch_below')}
 									disabled={isReadOnly}
 									onclick={async () => {
 										await handleCreateNewRef(stackId, 'Below');
@@ -209,7 +210,7 @@
 						{/snippet}
 					</ContextMenuItemSubmenu>
 					<ContextMenuItem
-						label="Add empty commit"
+						label={$t('branches.add_empty_commit')}
 						icon="new-empty-commit"
 						testId={TestId.BranchHeaderContextMenu_AddEmptyCommit}
 						onclick={async () => {
@@ -225,7 +226,7 @@
 					/>
 					{#if branch.commits.length > 1}
 						<ContextMenuItem
-							label="Squash all commits"
+							label={$t('branches.squash_all_commits')}
 							icon="squash-commits"
 							testId={TestId.BranchHeaderContextMenu_SquashAllCommits}
 							onclick={async () => {
@@ -260,7 +261,7 @@
 					{/if}
 					{#if branchType !== 'Integrated'}
 						<ContextMenuItem
-							label="Rename"
+							label={$t('branches.rename')}
 							icon="edit"
 							testId={TestId.BranchHeaderContextMenu_Rename}
 							disabled={isReadOnly}
@@ -280,7 +281,7 @@
 					{/if}
 					{#if stackLength && (stackLength > 1 || (stackLength === 1 && branch.commits.length === 0))}
 						<ContextMenuItem
-							label="Delete"
+							label={$t('branches.delete')}
 							icon="bin"
 							testId={TestId.BranchHeaderContextMenu_Delete}
 							disabled={isReadOnly}

@@ -21,3 +21,6 @@ pub use self::{
     refspec::{Error as RefSpecError, RefSpec},
     repository::{clone, fetch, push},
 };
+
+// Re-export repository error type for convenience
+pub use repository::Error as RepositoryError;

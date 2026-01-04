@@ -1,6 +1,7 @@
 <script lang="ts">
 	import signinSvg from '$lib/assets/signin.svg?raw';
 	import { USER_SERVICE } from '$lib/user/userService';
+	import { t } from '$lib/i18n/i18n';
 	import { inject } from '@gitbutler/core/context';
 	import { AsyncButton, Button, CardGroup } from '@gitbutler/ui';
 
@@ -19,10 +20,9 @@
 	<CardGroup>
 		<section class="welcome-signin-action">
 			<div class="stack-v gap-8">
-				<h3 class="text-18 text-bold">Log in or Sign up</h3>
+				<h3 class="text-18 text-bold">{$t('auth.log_in_or_sign_up')}</h3>
 				<p class="text-12 text-body clr-text-2">
-					Log in to access smart automation features, including intelligent branch creation and
-					commit message generation.
+					{$t('auth.login_description')}
 				</p>
 
 				<div class="flex gap-8 m-t-8">
@@ -44,8 +44,8 @@
 
 								// TODO: Track login calls
 								await userService.login(aborted);
-							}}>Log in / Sign up</Button
-						>
+							}}
+						>{$t('auth.log_in_sign_up_button')}</Button>
 					{/if}
 
 					{#if $loading && showCancel}
@@ -58,9 +58,10 @@
 								cancelClicked = true;
 								showCancel = false;
 								$aborted = true;
-							}}>Cancel</AsyncButton
-						>
+							}}
+						>{$t('auth.cancel')}</AsyncButton>
 					{/if}
+
 					<Button
 						kind="outline"
 						icon="copy-small"
@@ -78,8 +79,8 @@
 							}, 3000);
 
 							await userService.loginAndCopyLink(aborted);
-						}}>Copy login link</Button
-					>
+						}}
+					>{$t('auth.copy_login_link')}</Button>
 				</div>
 			</div>
 

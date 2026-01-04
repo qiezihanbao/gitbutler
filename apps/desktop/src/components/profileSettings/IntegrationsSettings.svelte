@@ -1,6 +1,7 @@
 <script lang="ts">
 	import GithubIntegration from '$components/GithubIntegration.svelte';
 	import { SETTINGS_SERVICE } from '$lib/config/appSettingsV2';
+	import { t } from '$lib/i18n/i18n';
 	import { inject } from '@gitbutler/core/context';
 	import { CardGroup, Spacer, Toggle } from '@gitbutler/ui';
 
@@ -20,11 +21,10 @@
 
 <CardGroup.Item labelFor="autoFillPrDescription">
 	{#snippet title()}
-		Auto-fill PR/MR descriptions from commit
+		{$t('settings.auto_fill_pr')}
 	{/snippet}
 	{#snippet caption()}
-		When creating a pull request or merge request for a branch with just one commit, automatically
-		use that commit's message as the PR/MR title and description.
+		{$t('settings.auto_fill_pr_description')}
 	{/snippet}
 	{#snippet actions()}
 		<Toggle

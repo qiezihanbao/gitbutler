@@ -7,6 +7,7 @@
 	import { OpenAIModelName, AnthropicModelName, ModelKind } from '$lib/ai/types';
 	import { GIT_CONFIG_SERVICE } from '$lib/config/gitConfigService';
 	import { SECRET_SERVICE } from '$lib/secrets/secretsService';
+	import { t } from '$lib/i18n/i18n';
 	import { USER_SERVICE } from '$lib/user/userService';
 	import { inject } from '@gitbutler/core/context';
 	import {
@@ -204,8 +205,7 @@
 {/snippet}
 
 <p class="text-13 text-body ai-settings__about-text">
-	GitButler supports multiple AI providers: OpenAI and Anthropic (via API or your own key), plus
-	local models through Ollama and LM Studio.
+	{$t('ai.ai_providers_description')}
 </p>
 
 <CardGroup>

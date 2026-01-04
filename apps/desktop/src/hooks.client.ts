@@ -10,6 +10,13 @@ import './lib/i18n/i18n';
 // Apply polyfills before any code runs
 polyfillAbortSignalTimeout();
 
+// Initialization function that can be called by the app
+export function init() {
+	// i18n is already initialized by the import above
+	// This function exists for compatibility with SvelteKit's client init
+	console.log('GitButler client initialized');
+}
+
 const E2E_MESSAGES_TO_IGNORE_DURING_E2E = [
 	'Unable to autolaunch a dbus-daemon without a $DISPLAY for X11'
 ];

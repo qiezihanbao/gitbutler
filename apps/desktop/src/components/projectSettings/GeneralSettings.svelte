@@ -5,6 +5,7 @@
 	import GerritForm from '$components/GerritForm.svelte';
 	import RemoveProjectForm from '$components/RemoveProjectForm.svelte';
 	import { projectDisableCodegen } from '$lib/config/config';
+	import { t } from '$lib/i18n/i18n';
 	import { CardGroup, Spacer, Toggle } from '@gitbutler/ui';
 
 	const { projectId }: { projectId: string } = $props();
@@ -19,10 +20,10 @@
 <!-- Maybe we could inline more settings here -->
 <CardGroup.Item standalone labelFor="disable-codegen">
 	{#snippet title()}
-		Disable codegen
+		{$t('codegen.disable_codegen')}
 	{/snippet}
 	{#snippet caption()}
-		Hides the codegen button in the branch headers.
+		{$t('codegen.disable_codegen_description')}
 	{/snippet}
 	{#snippet actions()}
 		<Toggle

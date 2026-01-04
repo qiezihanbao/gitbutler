@@ -46,6 +46,7 @@
 	import { editPatch } from '$lib/editMode/editPatchUtils';
 	import { MODE_SERVICE } from '$lib/mode/modeService';
 	import { STACK_SERVICE } from '$lib/stacks/stackService.svelte';
+	import { t } from '$lib/i18n/i18n';
 	import { URL_SERVICE } from '$lib/utils/url';
 	import { ensureValue } from '$lib/utils/validation';
 	import { inject, injectOptional } from '@gitbutler/core/context';
@@ -226,11 +227,11 @@
 				{#if contextData.commitStatus === 'LocalAndRemote' || contextData.commitStatus === 'LocalOnly'}
 					{@const stackId = contextData.stackId}
 
-					<ContextMenuItemSubmenu label="Add empty commit" icon="new-empty-commit">
+					<ContextMenuItemSubmenu label={$t('branches.add_empty_commit')} icon="new-empty-commit">
 						{#snippet submenu({ close: closeSubmenu })}
 							<ContextMenuSection>
 								<ContextMenuItem
-									label="Add empty commit above"
+									label={$t('branches.add_empty_commit_above')}
 									disabled={isReadOnly || commitInsertion.current.isLoading}
 									onclick={() => {
 										insertBlankCommit(ensureValue(stackId), commitId, 'above');
@@ -239,7 +240,7 @@
 									}}
 								/>
 								<ContextMenuItem
-									label="Add empty commit below"
+									label={$t('branches.add_empty_commit_below')}
 									disabled={isReadOnly || commitInsertion.current.isLoading}
 									onclick={() => {
 										insertBlankCommit(ensureValue(stackId), commitId, 'below');

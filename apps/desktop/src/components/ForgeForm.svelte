@@ -8,6 +8,7 @@
 	import { usePreferredGitHubUsername } from '$lib/forge/github/hooks.svelte';
 	import { GITLAB_STATE } from '$lib/forge/gitlab/gitlabState.svelte';
 	import { PROJECTS_SERVICE } from '$lib/project/projectsService';
+	import { t } from '$lib/i18n/i18n';
 	import { inject } from '@gitbutler/core/context';
 	import { reactive } from '@gitbutler/shared/reactiveUtils.svelte';
 	import { CardGroup, InfoMessage, Link, Select, SelectItem, Spacer, Textbox } from '@gitbutler/ui';
@@ -73,22 +74,21 @@
 <CardGroup>
 	<CardGroup.Item>
 		{#snippet title()}
-			Forge override
+			{$t('settings.forge_override')}
 		{/snippet}
 
 		{#snippet caption()}
 			{#if forge.determinedForgeType === 'default'}
-				We couldn't detect which Forge you're using.
+				{$t('settings.forge_not_detected')}
 				<br />
-				To enable Forge integration, please select your Forge from the dropdown below.
+				{$t('settings.forge_not_detected_description')}
 				<br />
-				<span class="text-bold">Note:</span> Currently, only GitHub and GitLab support pull request creation.
+				<span class="text-bold">{$t('common.note')}:</span> {$t('settings.forge_not_supported')}
 			{:else}
-				We’ve detected that you’re using <span class="text-bold"
-					>{forge.determinedForgeType.toUpperCase()}</span
-				>.
+				{@const forgeType = forge.determinedForgeType.toUpperCase()}
+				{$t('settings.forge_detected', { forgeType })}
 				<br />
-				At the moment, it’s not possible to manually override the detected forge type.
+				{$t('settings.forge_cannot_override')}
 			{/if}
 		{/snippet}
 
@@ -162,12 +162,14 @@
 	{#if forge.current.name === 'github'}
 		<CardGroup.Item>
 			{#snippet title()}
-				Configure GitHub integration
+				{$t('settings.configure_github_integration')}
 			{/snippet}
 
 			{#snippet caption()}
-				Enable pull request creation. Read more in the <Link
-					href="https://docs.gitbutler.com/features/forge-integration/github-integration">docs</Link
+				{$t('settings.enable_pull_request_creation')} <Link
+					href="https://docs.gitbutler.com/features/forge-integration/github-integration">{$t('common.read_more')}</Link
+				> {$t('common.in_the')} <Link
+					href="https://docs.gitbutler.com/features/forge-integration/github-integration">{$t('common.docs')}</Link
 				>
 			{/snippet}
 
@@ -175,16 +177,16 @@
 				<!-- TODO: Link to the general settings -->
 				<InfoMessage style="warning" filled outlined={false}>
 					{#snippet title()}
-						No GitHub accounts found
+						{$t('settings.no_github_accounts')}
 					{/snippet}
 					{#snippet content()}
-						Add a GitHub account in General Settings to enable GitHub integration
+						{$t('settings.add_github_account_general_settings')}
 					{/snippet}
 				</InfoMessage>
 			{:else}
 				{@const account = preferredGitHubAccount.current}
 				<Select
-					label="GitHub account for this project"
+					label={$t('settings.github_account_for_project')}
 					value={githubAccountIdentifierToString(account)}
 					options={githubAccounts.current.map((account) => ({
 						label: account.info.username,

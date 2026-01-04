@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { Icon, Button } from '@gitbutler/ui';
+	import { t } from '$lib/i18n/i18n';
 
 	interface Props {
 		onSettingsBtnClick: () => void;
@@ -14,14 +15,14 @@
 			<h3 class="text-16 text-semibold">
 				<span class="not-available-banner__icon">
 					<Icon name="warning" />
-				</span> Claude code can't be found
+				</span> {$t('codegen.claude_code_not_found')}
 			</h3>
 			<p class="text-13 text-body clr-text-2">
-				Connect Claude Code to keep going with this session.
+				{$t('codegen.connect_claude_code_to_continue')}
 			</p>
 		</div>
 		<Button style="gray" icon="mixer" type="button" reversedDirection onclick={onSettingsBtnClick}
-			>Set up connection…</Button
+			>{$t('codegen.setup_connection')}</Button
 		>
 	</div>
 </div>

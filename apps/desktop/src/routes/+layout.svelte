@@ -2,6 +2,8 @@
 	import '@gitbutler/design-core/utility';
 	import '@gitbutler/design-core/core';
 	import '../styles/styles.css';
+	// Initialize i18n early to ensure it's available for all components
+	import '$lib/i18n/i18n';
 	import { browser, dev } from '$app/environment';
 	import { afterNavigate, beforeNavigate } from '$app/navigation';
 	import { page } from '$app/state';

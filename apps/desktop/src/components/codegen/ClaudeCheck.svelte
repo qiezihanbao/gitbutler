@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { CLAUDE_CODE_SERVICE } from '$lib/codegen/claude';
 	import { SETTINGS_SERVICE } from '$lib/config/appSettingsV2';
+	import { t } from '$lib/i18n/i18n';
 	import { inject } from '@gitbutler/core/context';
 	import { Icon, Textbox, AsyncButton, Codeblock } from '@gitbutler/ui';
 	import { fromStore } from 'svelte/store';
@@ -92,10 +93,10 @@
 		<div class="flex items-center gap-8 flex-1">
 			{#if isClaudeNotAvailable}
 				<Icon name="warning" color="warning" />
-				<h4 class="text-16 text-semibold text-body">Claude Code can't be found</h4>
+				<h4 class="text-16 text-semibold text-body">{$t('codegen.claude_code_not_found')}</h4>
 			{:else}
 				<Icon name="success" color="safe" />
-				<h4 class="text-16 text-semibold text-body">Claude code is connected</h4>
+				<h4 class="text-16 text-semibold text-body">{$t('codegen.claude_code_connected')}</h4>
 			{/if}
 		</div>
 	</div>
@@ -103,12 +104,12 @@
 
 <div class="claude-config">
 	<Textbox
-		label="Claude Code path:"
+		label={$t('codegen.claude_code_path')}
 		value={claudeExecutable}
-		placeholder="Path to the Claude Code executable"
+		placeholder={$t('codegen.claude_code_path_placeholder')}
 		onchange={updateClaudeExecutable}
 		error={recheckedAvailability === 'recheck-failed'
-			? 'Claude exited with a non 0 code'
+			? $t('codegen.claude_error_non_zero_code')
 			: undefined}
 	/>
 
@@ -129,12 +130,12 @@
 			class="claude-test-result-messaege success"
 			onclick={handleSuccessClick}
 		>
-			<p class="text-12">You're all set! Connection's good!</p>
+			<p class="text-12">{$t('codegen.connection_good')}</p>
 			<Icon name="tick" />
 		</div>
 	{:else}
 		<AsyncButton style="gray" action={handleCheckAvailability} icon="update" loading={isChecking}>
-			Check Connection
+			{$t('codegen.check_connection')}
 		</AsyncButton>
 	{/if}
 </div>

@@ -7,6 +7,7 @@
 	import { rewrapCommitMessage } from '$lib/config/uiFeatureFlags';
 	import { createCommitSelection } from '$lib/selection/key';
 	import { STACK_SERVICE } from '$lib/stacks/stackService.svelte';
+	import { t } from '$lib/i18n/i18n';
 	import { inject } from '@gitbutler/core/context';
 
 	type Props = {
@@ -45,7 +46,7 @@
 		<ReduxResult {projectId} result={changesQuery.result}>
 			{#snippet children(changes)}
 				<ChangedFiles
-					title="Changed files"
+					title={$t('files.changed_files')}
 					autoselect
 					grow
 					{projectId}

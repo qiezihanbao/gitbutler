@@ -3,6 +3,7 @@
 	import SettingsSection from '$components/SettingsSection.svelte';
 	import { GIT_CONFIG_SERVICE } from '$lib/config/gitConfigService';
 	import { GIT_SERVICE } from '$lib/git/gitService';
+	import { t } from '$lib/i18n/i18n';
 	import { inject } from '@gitbutler/core/context';
 	import {
 		Button,
@@ -99,13 +100,10 @@
 	<CardGroup>
 		<CardGroup.Item labelFor="signCommits">
 			{#snippet title()}
-				Sign commits
+				{$t('settings.sign_commits')}
 			{/snippet}
 			{#snippet caption()}
-				Use GPG or SSH to sign your commits so they can be verified as authentic.
-				<br />
-				GitButler will sign commits as per your git configuration, but evaluates
-				<code class="code-string">gitbutler.signCommits</code> with priority.
+				{$t('settings.sign_commits_description')}
 			{/snippet}
 			{#snippet actions()}
 				<Toggle id="signCommits" checked={signCommits} onclick={handleSignCommitsClick} />

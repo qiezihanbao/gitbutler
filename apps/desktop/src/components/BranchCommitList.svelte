@@ -31,12 +31,13 @@
 	import { STACK_SERVICE } from '$lib/stacks/stackService.svelte';
 	import { combineResults } from '$lib/state/helpers';
 	import { UI_STATE } from '$lib/state/uiState.svelte';
+	import { t } from '$lib/i18n/i18n';
 	import { inject } from '@gitbutler/core/context';
 	import { persisted } from '@gitbutler/shared/persisted';
 	import { Button, Modal, RadioButton, TestId } from '@gitbutler/ui';
 	import { DRAG_STATE_SERVICE } from '@gitbutler/ui/drag/dragStateService.svelte';
 	import { focusable } from '@gitbutler/ui/focus/focusable';
-	import { getTimeAgo } from '@gitbutler/ui/utils/timeAgo';
+	import { getTimeAgo } from '$lib/utils/timeAgo';
 	import { isDefined } from '@gitbutler/ui/utils/typeguards';
 	import type { BranchDetails } from '$lib/stacks/stack';
 
@@ -143,9 +144,9 @@
 	function getLabelForIntegrationMode(mode: IntegrationMode): string {
 		switch (mode) {
 			case 'rebase':
-				return 'Rebase';
+				return t('workspace.rebase');
 			case 'interactive':
-				return 'Configure integration…';
+				return t('workspace.configure_integration');
 		}
 	}
 </script>
@@ -162,8 +163,8 @@
 		<div class="uppstream-integration-actions__radio-container">
 			{@render integrationRadioOption(
 				'rebase',
-				'Rebase upstream changes',
-				'Place local-only changes on top, then the upstream changes. Similar to git pull --rebase.'
+				t('workspace.rebase_upstream'),
+				t('workspace.rebase_upstream_description')
 			)}
 			{@render integrationRadioOption(
 				'interactive',
@@ -257,8 +258,8 @@
 
 					<UpstreamCommitsAction testId={TestId.UpstreamCommitsCommitAction} isLast={!hasCommits}>
 						{#snippet action()}
-							<h3 class="text-13 text-semibold m-b-4">Upstream has new commits</h3>
-							<p class="text-12 text-body clr-text-2 m-b-14">Update your branch to stay current.</p>
+							<h3 class="text-13 text-semibold m-b-4">{$t('workspace.upstream_has_new_commits')}</h3>
+							<p class="text-12 text-body clr-text-2 m-b-14">{$t('workspace.update_branch_description')}</p>
 							{@render integrateUpstreamAction()}
 						{/snippet}
 					</UpstreamCommitsAction>

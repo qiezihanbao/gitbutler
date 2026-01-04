@@ -2,6 +2,7 @@
 	import ReduxResult from '$components/ReduxResult.svelte';
 	import { projectRunCommitHooks } from '$lib/config/config';
 	import { PROJECTS_SERVICE } from '$lib/project/projectsService';
+	import { t } from '$lib/i18n/i18n';
 	import { inject } from '@gitbutler/core/context';
 	import { CardGroup, Spacer, Textarea, Textbox, Toggle } from '@gitbutler/ui';
 
@@ -17,12 +18,12 @@
 	<ReduxResult {projectId} result={projectQuery.result}>
 		{#snippet children(project)}
 			<div class="fields-wrapper">
-				<Textbox label="Project path" readonly id="path" value={project?.path} />
+				<Textbox label={$t('settings.project_path')} readonly id="path" value={project?.path} />
 				<div class="description-wrapper">
 					<Textbox
-						label="Project name"
+						label={$t('settings.project_name')}
 						id="name"
-						placeholder="Project name can't be empty"
+						placeholder={$t('settings.project_name_empty')}
 						value={project.title}
 						required
 						onchange={(value: string) => {
@@ -33,7 +34,7 @@
 						id="description"
 						minRows={3}
 						maxRows={6}
-						placeholder="Project description"
+						placeholder={$t('settings.project_description')}
 						value={project.description}
 						oninput={(e: Event) => {
 							const target = e.currentTarget as HTMLTextAreaElement;
@@ -51,11 +52,10 @@
 <CardGroup>
 	<CardGroup.Item labelFor="runHooks">
 		{#snippet title()}
-			Run Git hooks
+			{$t('settings.run_git_hook')}
 		{/snippet}
 		{#snippet caption()}
-			Enabling this will run git pre-push, pre and post commit, and commit-msg hooks you have
-			configured in your repository.
+			{$t('settings.run_git_hook_description')}
 		{/snippet}
 		{#snippet actions()}
 			<Toggle id="runHooks" bind:checked={$runCommitHooks} />

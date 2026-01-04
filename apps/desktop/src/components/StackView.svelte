@@ -459,7 +459,7 @@
 			{@const ancestorMostConflictedCommitId = getAncestorMostConflicted(commits)?.id}
 
 			<ChangedFiles
-				title="Changed files"
+				title={$t('files.changed_files')}
 				{projectId}
 				{stackId}
 				draggableFiles
@@ -498,7 +498,7 @@
 	<ReduxResult projectId={stableProjectId} stackId={stableStackId} result={changesQuery.result}>
 		{#snippet children(changesResult, { projectId, stackId })}
 			<ChangedFiles
-				title="Combined Changes"
+				title={$t('branches.combined_changes')}
 				{projectId}
 				{stackId}
 				draggableFiles

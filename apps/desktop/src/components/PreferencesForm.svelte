@@ -2,6 +2,7 @@
 	import ReduxResult from '$components/ReduxResult.svelte';
 	import SettingsSection from '$components/SettingsSection.svelte';
 	import { PROJECTS_SERVICE } from '$lib/project/projectsService';
+	import { t } from '$lib/i18n/i18n';
 	import { inject } from '@gitbutler/core/context';
 	import { CardGroup, Toggle } from '@gitbutler/ui';
 
@@ -15,10 +16,10 @@
 		<SettingsSection gap={8}>
 			<CardGroup.Item standalone labelFor="omitCertificateCheck">
 				{#snippet title()}
-					Ignore host certificate checks
+					{$t('settings.ignore_host_certificate_checks')}
 				{/snippet}
 				{#snippet caption()}
-					Enabling this will ignore host certificate checks when authenticating with ssh.
+					{$t('settings.ignore_host_certificate_checks_description')}
 				{/snippet}
 				{#snippet actions()}
 					<Toggle

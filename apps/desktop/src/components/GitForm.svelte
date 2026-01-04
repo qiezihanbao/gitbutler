@@ -5,6 +5,7 @@
 	import SettingsSection from '$components/SettingsSection.svelte';
 	import { BACKEND } from '$lib/backend';
 	import { PROJECTS_SERVICE } from '$lib/project/projectsService';
+	import { t } from '$lib/i18n/i18n';
 	import { inject } from '@gitbutler/core/context';
 	import { CardGroup, Spacer, Toggle } from '@gitbutler/ui';
 	import type { Project } from '$lib/project/project';
@@ -36,11 +37,10 @@
 			<CardGroup>
 				<CardGroup.Item labelFor="allowForcePush">
 					{#snippet title()}
-						Allow force pushing
+						{$t('settings.allow_force_pushing')}
 					{/snippet}
 					{#snippet caption()}
-						Force pushing allows GitButler to override branches even if they were pushed to remote.
-						GitButler will never force push to the target branch.
+						{$t('settings.allow_force_pushing_description')}
 					{/snippet}
 					{#snippet actions()}
 						<Toggle
@@ -52,11 +52,10 @@
 				</CardGroup.Item>
 				<CardGroup.Item labelFor="forcePushProtection">
 					{#snippet title()}
-						Force push protection
+						{$t('settings.force_push_protection')}
 					{/snippet}
 					{#snippet caption()}
-						Protect remote commits during force pushes. This will use Git's safer force push flags
-						to avoid overwriting remote commit history.
+						{$t('settings.force_push_protection_description')}
 					{/snippet}
 					{#snippet actions()}
 						<Toggle

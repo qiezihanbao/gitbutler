@@ -2,6 +2,7 @@
 	import ThemeSelector from '$components/ThemeSelector.svelte';
 	import { stagingBehaviorFeature, type StagingBehavior } from '$lib/config/uiFeatureFlags';
 	import { SETTINGS } from '$lib/settings/userSettings';
+	import { t } from '$lib/i18n/i18n';
 	import { inject } from '@gitbutler/core/context';
 	import {
 		CardGroup,
@@ -57,18 +58,18 @@
 
 <CardGroup.Item alignment="center" standalone>
 	{#snippet title()}
-		Default file list mode
+		{$t('settings.default_file_list_mode')}
 	{/snippet}
 	{#snippet caption()}
-		Set the default file list view (can be changed per location).
+		{$t('settings.default_file_list_mode_description')}
 	{/snippet}
 	{#snippet actions()}
 		<Select
 			maxWidth={120}
 			value={$userSettings.defaultFileListMode}
 			options={[
-				{ label: 'List view', value: 'list' },
-				{ label: 'Tree view', value: 'tree' }
+				{ label: $t('settings.list_view'), value: 'list' },
+				{ label: $t('settings.tree_view'), value: 'tree' }
 			]}
 			onselect={(value) => {
 				userSettings.update((s) => ({
@@ -89,7 +90,7 @@
 <CardGroup>
 	<CardGroup.Item alignment="center">
 		{#snippet title()}
-			Diff preview
+			{$t('settings.diff_preview')}
 		{/snippet}
 
 		<HunkDiff
@@ -107,10 +108,10 @@
 
 	<CardGroup.Item>
 		{#snippet title()}
-			Font family
+			{$t('settings.font_family')}
 		{/snippet}
 		{#snippet caption()}
-			Sets the font for the diff view. The first font name is the default, others are fallbacks.
+			{$t('settings.font_family_description')}
 		{/snippet}
 
 		<Textbox
@@ -128,7 +129,7 @@
 
 	<CardGroup.Item labelFor="allowDiffLigatures">
 		{#snippet title()}
-			Allow font ligatures
+			{$t('settings.allow_font_ligatures')}
 		{/snippet}
 		{#snippet actions()}
 			<Toggle
@@ -146,10 +147,10 @@
 
 	<CardGroup.Item alignment="center">
 		{#snippet title()}
-			Tab size
+			{$t('settings.tab_size')}
 		{/snippet}
 		{#snippet caption()}
-			Number of spaces per tab in the diff view.
+			{$t('settings.tab_size_description')}
 		{/snippet}
 
 		{#snippet actions()}
@@ -174,10 +175,10 @@
 
 	<CardGroup.Item labelFor="wrapText">
 		{#snippet title()}
-			Soft wrap
+			{$t('settings.soft_wrap')}
 		{/snippet}
 		{#snippet caption()}
-			Soft wrap long lines in the diff view to fit within the viewport.
+			{$t('settings.soft_wrap_description')}
 		{/snippet}
 
 		{#snippet actions()}
@@ -196,19 +197,19 @@
 
 	<CardGroup.Item>
 		{#snippet title()}
-			Lines contrast
+			{$t('settings.lines_contrast')}
 		{/snippet}
 		{#snippet caption()}
-			The contrast for added, deleted, and context lines in diffs.
+			{$t('settings.lines_contrast_description')}
 		{/snippet}
 		{#snippet actions()}
 			<Select
 				maxWidth={110}
 				value={$userSettings.diffContrast}
 				options={[
-					{ label: 'Light', value: 'light' },
-					{ label: 'Medium', value: 'medium' },
-					{ label: 'Strong', value: 'strong' }
+					{ label: $t('settings.light'), value: 'light' },
+					{ label: $t('settings.medium'), value: 'medium' },
+					{ label: $t('settings.strong'), value: 'strong' }
 				]}
 				onselect={(value) => {
 					userSettings.update((s) => ({
@@ -228,12 +229,10 @@
 
 	<CardGroup.Item labelFor="colorBlindFriendly">
 		{#snippet title()}
-			Color blind-friendly colors
+			{$t('settings.color_blind_friendly')}
 		{/snippet}
 		{#snippet caption()}
-			Use blue and orange colors instead of green and red for better
-			<br />
-			accessibility with color vision deficiency.
+			{$t('settings.color_blind_friendly_description')}
 		{/snippet}
 		{#snippet actions()}
 			<Toggle
@@ -251,11 +250,10 @@
 
 	<CardGroup.Item labelFor="inlineUnifiedDiffs">
 		{#snippet title()}
-			Display word diffs inline
+			{$t('settings.display_word_diffs_inline')}
 		{/snippet}
 		{#snippet caption()}
-			Instead of separate lines for removals and additions, this feature shows a single line with
-			both added and removed words highlighted.
+			{$t('settings.display_word_diffs_inline_description')}
 		{/snippet}
 		{#snippet actions()}
 			<Toggle
@@ -276,10 +274,10 @@
 	<form class="stack-v" onchange={(e) => onScrollbarFormChange(e.currentTarget)}>
 		<CardGroup.Item labelFor="scrollbar-on-scroll">
 			{#snippet title()}
-				Scrollbar-On-Scroll
+				{$t('settings.scrollbar_on_scroll')}
 			{/snippet}
 			{#snippet caption()}
-				Only show the scrollbar when you are scrolling.
+				{$t('settings.scrollbar_on_scroll_description')}
 			{/snippet}
 			{#snippet actions()}
 				<RadioButton
@@ -293,10 +291,10 @@
 
 		<CardGroup.Item labelFor="scrollbar-on-hover">
 			{#snippet title()}
-				Scrollbar-On-Hover
+				{$t('settings.scrollbar_on_hover')}
 			{/snippet}
 			{#snippet caption()}
-				Show the scrollbar only when you hover over the scrollable area.
+				{$t('settings.scrollbar_on_hover_description')}
 			{/snippet}
 			{#snippet actions()}
 				<RadioButton
@@ -310,7 +308,7 @@
 
 		<CardGroup.Item labelFor="scrollbar-always">
 			{#snippet title()}
-				Always show scrollbar
+				{$t('settings.always_show_scrollbar')}
 			{/snippet}
 			{#snippet actions()}
 				<RadioButton
@@ -328,11 +326,10 @@
 	<form class="stack-v" onchange={(e) => onStagingBehaviorFormChange(e.currentTarget)}>
 		<CardGroup.Item labelFor="stage-all">
 			{#snippet title()}
-				Stage all files
+				{$t('settings.stage_all_files')}
 			{/snippet}
 			{#snippet caption()}
-				Stage all files assigned to the stack on commit. If no files are staged, all unassigned
-				files will be staged.
+				{$t('settings.stage_all_files_description')}
 			{/snippet}
 			{#snippet actions()}
 				<RadioButton
@@ -346,13 +343,10 @@
 
 		<CardGroup.Item labelFor="stage-selection">
 			{#snippet title()}
-				Stage selected files
+				{$t('settings.stage_selected_files')}
 			{/snippet}
 			{#snippet caption()}
-				Stage the selected assigned files to the stack on commit. If no files are selected, stage
-				all files. If there are no assigned files, stage all selected unassigned files.
-				<br />
-				And if no files are selected, stage all unassigned files.
+				{$t('settings.stage_selected_files_description')}
 			{/snippet}
 			{#snippet actions()}
 				<RadioButton
@@ -366,12 +360,10 @@
 
 		<CardGroup.Item labelFor="stage-none">
 			{#snippet title()}
-				Don't stage files automatically
+				{$t('settings.dont_stage_files_automatically')}
 			{/snippet}
 			{#snippet caption()}
-				Do not stage any files automatically.
-				<br />
-				You're more of a DIY developer in that way.
+				{$t('settings.dont_stage_files_automatically_description')}
 			{/snippet}
 			{#snippet actions()}
 				<RadioButton

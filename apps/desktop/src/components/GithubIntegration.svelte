@@ -5,6 +5,7 @@
 	import githubLogoSvg from '$lib/assets/unsized-logos/github.svg?raw';
 	import { CLIPBOARD_SERVICE } from '$lib/backend/clipboard';
 	import { GITHUB_USER_SERVICE } from '$lib/forge/github/githubUserService.svelte';
+	import { t } from '$lib/i18n/i18n';
 	import { URL_SERVICE } from '$lib/utils/url';
 	import { inject } from '@gitbutler/core/context';
 
@@ -354,7 +355,7 @@
 </div>
 
 <p class="text-12 text-body github-integration-settings__text">
-	🔒 Credentials are persisted locally in your OS Keychain / Credential Manager.
+	{$t('ai.credentials_secure')}
 </p>
 
 {#snippet addProfileButton(noAccounts: boolean)}

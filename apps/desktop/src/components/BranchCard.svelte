@@ -17,7 +17,7 @@
 	import { t } from '$lib/i18n/i18n';
 	import { inject } from '@gitbutler/core/context';
 	import { ReviewBadge, TestId } from '@gitbutler/ui';
-	import { getTimeAgo } from '@gitbutler/ui/utils/timeAgo';
+	import { getTimeAgo } from '$lib/utils/timeAgo';
 	import { isDefined } from '@gitbutler/ui/utils/typeguards';
 	import type { DropzoneHandler } from '$lib/dragging/handler';
 	import type { PushStatus } from '$lib/stacks/stack';
@@ -231,10 +231,10 @@
 				{/snippet}
 
 				{#snippet emptyState()}
-					<span class="branch-header__empty-state-span">This is an empty branch.</span>
-					<span class="branch-header__empty-state-span">Click for details.</span>
+					<span class="branch-header__empty-state-span">{$t('branches.empty_branch')}</span>
+					<span class="branch-header__empty-state-span">{$t('branches.empty_branch_click_details')}</span>
 					<br />
-					Create or drag & drop commits here.
+					{$t('branches.empty_branch_instructions')}
 				{/snippet}
 
 				{#snippet content()}
@@ -298,8 +298,7 @@
 			onclick={args.onclick}
 		>
 			{#snippet emptyState()}
-				<span class="branch-header__empty-state-span">There are no commits yet on this branch.</span
-				>
+				<span class="branch-header__empty-state-span">{$t('branches.no_commits_yet')}</span>
 			{/snippet}
 			{#snippet content()}
 				{#if args.lastUpdatedAt}

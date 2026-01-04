@@ -4,6 +4,7 @@
 	import WelcomeSigninAction from '$components/WelcomeSigninAction.svelte';
 	import { projectAiExperimentalFeaturesEnabled, projectAiGenEnabled } from '$lib/config/config';
 	import { useSettingsModal } from '$lib/settings/settingsModal.svelte';
+	import { t } from '$lib/i18n/i18n';
 	import { USER_SERVICE } from '$lib/user/userService';
 	import { inject } from '@gitbutler/core/context';
 	import { Button, CardGroup, Spacer, Toggle } from '@gitbutler/ui';
@@ -20,9 +21,7 @@
 
 <SettingsSection>
 	{#snippet description()}
-		GitButler supports the use of OpenAI and Anthropic to provide commit message and branch name
-		generation. This works either through GitButler's API or in a bring your own key configuration
-		and can be configured in the main preferences screen.
+		{$t('ai.ai_support_description')}
 	{/snippet}
 
 	<Spacer />
@@ -35,11 +34,10 @@
 	<CardGroup>
 		<CardGroup.Item labelFor="aiGenEnabled">
 			{#snippet title()}
-				Enable branch and commit message generation
+				{$t('ai.enable_branch_commit_generation')}
 			{/snippet}
 			{#snippet caption()}
-				If enabled, diffs will be sent to OpenAI or Anthropic's servers when pressing the "Generate
-				message" and "Generate branch name" button.
+				{$t('ai.enable_branch_commit_generation_description')}
 			{/snippet}
 			{#snippet actions()}
 				<Toggle
@@ -57,11 +55,10 @@
 		<CardGroup>
 			<CardGroup.Item labelFor="aiExperimental">
 				{#snippet title()}
-					Enable experimental AI features
+					{$t('ai.enable_experimental_ai')}
 				{/snippet}
 				{#snippet caption()}
-					If enabled, you will be able to access the AI features currently in development. This also
-					requires you to use OpenAI through GitButler in order for the features to work.
+					{$t('ai.enable_experimental_ai_description')}
 				{/snippet}
 				{#snippet actions()}
 					<Toggle
@@ -79,7 +76,7 @@
 	<CardGroup>
 		<CardGroup.Item>
 			{#snippet title()}
-				Custom prompts
+				{$t('ai.custom_prompts')}
 			{/snippet}
 
 			<AiPromptSelect {projectId} promptUse="commits" />
@@ -88,11 +85,10 @@
 			<Spacer margin={8} />
 
 			<p class="text-12 text-body">
-				You can apply your own custom prompts to the project. By default, the project uses GitButler
-				prompts, but you can create your own prompts in the general settings.
+				{$t('ai.custom_prompts_description')}
 			</p>
 			<Button kind="outline" icon="edit" onclick={() => openGeneralSettings('ai')}
-				>Customize prompts</Button
+				>{$t('ai.customize_prompts')}</Button
 			>
 		</CardGroup.Item>
 	</CardGroup>

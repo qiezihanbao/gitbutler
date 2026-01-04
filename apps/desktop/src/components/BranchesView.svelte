@@ -32,11 +32,12 @@
 	import { handleCreateBranchFromBranchOutcome } from '$lib/stacks/stack';
 	import { STACK_SERVICE } from '$lib/stacks/stackService.svelte';
 	import { UI_STATE } from '$lib/state/uiState.svelte';
+	import { t } from '$lib/i18n/i18n';
 	import { inject } from '@gitbutler/core/context';
 	import { persisted } from '@gitbutler/shared/persisted';
 	import { AsyncButton, Button, Modal, TestId } from '@gitbutler/ui';
 	import { focusable } from '@gitbutler/ui/focus/focusable';
-	import { getTimeAgo } from '@gitbutler/ui/utils/timeAgo';
+	import { getTimeAgo } from '$lib/utils/timeAgo';
 	import type { BranchFilterOption, SidebarEntrySubject } from '$lib/branches/branchListing';
 	type Props = {
 		projectId: string;
@@ -200,7 +201,7 @@
 					class="branches-view__left"
 					use:focusable={{ vertical: true }}
 				>
-					<BranchesListGroup title="Current workspace target">
+					<BranchesListGroup title={$t('workspace.current_target')}>
 						<!-- TODO: We need an API for `commitsCount`! -->
 						<CurrentOriginCard
 							originName={baseBranch.branchName}

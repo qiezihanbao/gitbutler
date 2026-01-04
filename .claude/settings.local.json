@@ -8,13 +8,15 @@
       "Bash(cargo:*)",
       "Bash(rustc:*)",
       "Bash(echo:*)",
-      "Bash(export PATH=\"/c/Users/Administrator/.cargo/bin:$PATH:*)",
+      "Bash(export PATH=/c/Users/Administrator/.cargo/bin:$PATH:*)",
       "Bash(netstat:*)",
       "Bash(findstr:*)",
       "Bash(taskkill:*)",
       "Bash(tasklist:*)",
       "Bash(pnpm build:desktop:*)",
-      "Bash(pnpm tauri build:*)"
+      "Bash(pnpm tauri build:*)",
+      "Bash(dir:*)",
+      "Bash(timeout 60 pnpm:*)"
     ]
   }
 }

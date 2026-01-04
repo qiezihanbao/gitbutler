@@ -1,4 +1,5 @@
-import { t } from '$lib/i18n/i18n';
+import { dictionary, locale } from '$lib/i18n/i18n';
+import { get } from 'svelte/store';
 
 /**
  * Format a date as a relative time string (e.g., "5 min ago", "2 hours ago")
@@ -24,7 +25,7 @@ export function getTimeAgoI18n(input: Date | number, addSuffix: boolean = true):
 	let unit: string;
 
 	if (distance < 10) {
-		return t('time.just_now');
+		return translate('time.just_now');
 	} else if (distance < minute) {
 		value = Math.floor(distance);
 		unit = 'seconds';
@@ -55,11 +56,47 @@ export function getTimeAgoI18n(input: Date | number, addSuffix: boolean = true):
 		const translationKey = value === 1
 			? `time.${unit.slice(0, -1)}_${suffix}`  // singular: hour_ago, day_ago
 			: `time.${unit}_${suffix}`;  // plural: hours_ago, days_ago
-		return t(translationKey, { values: { value } });
+		return translate(translationKey, { value });
 	}
 
 	// For seconds and minutes, only plural form needed in practice
-	return t(`time.${unit}_${suffix}`, { values: { value } });
+	return translate(`time.${unit}_${suffix}`, { value });
+}
+
+/**
+ * Helper function to translate a key with optional parameters
+ */
+function translate(key: string, params?: Record<string, string | number>): string {
+	try {
+		const currentLocale = get(locale);
+		const currentDict = get(dictionary);
+
+		if (!currentDict || !currentLocale) {
+			// Fallback to English if dictionary isn't loaded yet
+			return key;
+		}
+
+		const messages = currentDict[currentLocale] || currentDict.en;
+
+		if (!messages) {
+			return key;
+		}
+
+		// Get the translation string
+		let translation = key.split('.').reduce((obj, k) => obj?.[k], messages as any) || key;
+
+		// Replace parameters in the format {paramName}
+		if (params) {
+			Object.entries(params).forEach(([paramName, paramValue]) => {
+				translation = translation.replace(`{${paramName}}`, String(paramValue));
+			});
+		}
+
+		return translation;
+	} catch (error) {
+		console.error('Translation error in timeAgo:', error);
+		return key;
+	}
 }
 
 /**

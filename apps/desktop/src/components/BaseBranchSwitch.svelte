@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { BASE_BRANCH_SERVICE } from '$lib/baseBranch/baseBranchService.svelte';
 	import { STACK_SERVICE } from '$lib/stacks/stackService.svelte';
+	import { t } from '$lib/i18n/i18n';
 	import { inject } from '@gitbutler/core/context';
 	import { Button, CardGroup, InfoMessage, Select, SelectItem } from '@gitbutler/ui';
 
@@ -53,12 +54,10 @@
 		<CardGroup>
 			<CardGroup.Item>
 				{#snippet title()}
-					Remote configuration
+					{$t('ai.remote_configuration')}
 				{/snippet}
 				{#snippet caption()}
-					Lets you choose where to push code and set the target branch for contributions. The target
-					branch is usually the "production" branch like 'origin/master' or 'upstream/main.' This
-					section helps ensure your code goes to the correct remote and branch for integration.
+					{$t('ai.remote_configuration_description')}
 				{/snippet}
 
 				<Select
@@ -69,7 +68,7 @@
 						selectedBranch = value;
 					}}
 					disabled={targetChangeDisabled}
-					label="Current target branch"
+					label={$t('ai.current_target_branch')}
 					searchable
 				>
 					{#snippet itemSnippet({ item, highlighted })}
@@ -88,7 +87,7 @@
 							selectedRemote = value;
 						}}
 						disabled={targetChangeDisabled}
-						label="Create branches on remote"
+						label={$t('ai.create_branches_on_remote')}
 					>
 						{#snippet itemSnippet({ item, highlighted })}
 							<SelectItem selected={item.value === selectedRemote} {highlighted}>
@@ -101,8 +100,10 @@
 				{#if targetChangeDisabled}
 					<InfoMessage filled outlined={false} icon="info">
 						{#snippet content()}
-							You have {stackCount === 1 ? '1 active branch' : `${stackCount} active branches`} in your
-							workspace. Please clear the workspace before switching the base branch.
+							{$t('ai.active_branches_in_workspace', {
+								count: stackCount,
+								singular: stackCount === 1 ? $t('ai.active_branch') : $t('ai.active_branches_plural')
+							})}
 						{/snippet}
 					</InfoMessage>
 				{:else}
@@ -116,8 +117,8 @@
 							targetChangeDisabled}
 					>
 						{targetBranchSwitch.current.isLoading
-							? 'Switching branches...'
-							: 'Update configuration'}
+							? $t('ai.switching_branches')
+							: $t('ai.update_configuration')}
 					</Button>
 				{/if}
 			</CardGroup.Item>

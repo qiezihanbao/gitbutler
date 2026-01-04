@@ -20,6 +20,7 @@
 	import { inject } from '@gitbutler/core/context';
 	import { Button, ContextMenu, ContextMenuItem, ContextMenuSection, TestId } from '@gitbutler/ui';
 	import { focusable } from '@gitbutler/ui/focus/focusable';
+	import { get } from 'svelte/store';
 
 	import { slide } from 'svelte/transition';
 
@@ -33,7 +34,7 @@
 	const { openGeneralSettings, openProjectSettings } = useSettingsModal();
 
 	// Language switcher
-	const currentLocale = $derived(locale.get() as SupportedLocale);
+	const currentLocale = $derived(get(locale) as SupportedLocale);
 
 	function handleLanguageSwitch() {
 		toggleLocale();
@@ -309,9 +310,9 @@
 	<ContextMenuSection title={$t('settings.language')}>
 		<ContextMenuItem
 			label="English"
-			selected={$currentLocale === 'en'}
+			selected={currentLocale === 'en'}
 			onclick={() => {
-				if ($currentLocale !== 'en') {
+				if (currentLocale !== 'en') {
 					handleLanguageSwitch();
 				}
 				contextMenuEl?.close();
@@ -319,9 +320,9 @@
 		/>
 		<ContextMenuItem
 			label="中文"
-			selected={$currentLocale === 'zh'}
+			selected={currentLocale === 'zh'}
 			onclick={() => {
-				if ($currentLocale !== 'zh') {
+				if (currentLocale !== 'zh') {
 					handleLanguageSwitch();
 				}
 				contextMenuEl?.close();
@@ -465,5 +466,14 @@
 		&:not(:disabled):hover {
 			--icon-opacity: 0.6;
 		}
+	}
+
+	/* 语言菜单样式优化 - 增加菜单项宽度 */
+	:global(.context-menu) {
+		min-width: 160px !important;
+	}
+
+	:global(.menu-item__label) {
+		min-width: 80px;
 	}
 </style>

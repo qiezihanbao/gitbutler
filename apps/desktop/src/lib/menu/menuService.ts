@@ -4,6 +4,7 @@ import zhTranslations from '$lib/i18n/locales/zh.json';
 import { getVersion } from '@tauri-apps/api/app';
 import { invoke } from '@tauri-apps/api/core';
 import { platform } from '@tauri-apps/plugin-os';
+import { get } from 'svelte/store';
 import type { Locale } from 'svelte-i18n';
 
 interface MenuTranslations {
@@ -53,8 +54,8 @@ interface MenuTranslations {
  * Get translation value by key for current locale
  */
 function getTranslation(key: string): string {
-	const currentLocale = locale.get() as Locale;
-	const dict = dictionary.get();
+	const currentLocale = get(locale) as Locale;
+	const dict = get(dictionary);
 
 	if (dict && dict[currentLocale]) {
 		const keys = key.split('.');

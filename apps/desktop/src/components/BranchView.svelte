@@ -15,6 +15,7 @@
 	import { STACK_SERVICE } from '$lib/stacks/stackService.svelte';
 	import { combineResults } from '$lib/state/helpers';
 	import { UI_STATE } from '$lib/state/uiState.svelte';
+	import { t } from '$lib/i18n/i18n';
 	import { inject } from '@gitbutler/core/context';
 	import { Icon, TestId, Tooltip } from '@gitbutler/ui';
 
@@ -181,11 +182,10 @@
 						{@html newBranchSmolSVG}
 					</div>
 					<h3 class="text-16 text-semibold branch-view__empty-state__title">
-						This is a new branch
+						{$t('branches.new_branch')}
 					</h3>
 					<p class="text-13 text-body branch-view__empty-state__description">
-						Commit your changes here. You can stack additional branches or apply them independently.
-						You can also drag and drop files to start a new commit.
+						{$t('branches.new_branch_description')}
 					</p>
 				</div>
 			{/if}

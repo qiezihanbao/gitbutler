@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { SETTINGS_SERVICE } from '$lib/config/appSettingsV2';
 	import { GIT_CONFIG_SERVICE } from '$lib/config/gitConfigService';
+	import { t } from '$lib/i18n/i18n';
 	import { inject } from '@gitbutler/core/context';
 	import { CardGroup, Link, Select, SelectItem, Toggle } from '@gitbutler/ui';
 	import { onMount } from 'svelte';
@@ -50,15 +51,14 @@
 
 <CardGroup.Item standalone labelFor="committerSigning">
 	{#snippet title()}
-		Credit GitButler as the committer
+		{$t('settings.credit_gitbutler')}
 	{/snippet}
 	{#snippet caption()}
-		By default, everything in the GitButler client is free to use. You can opt in to crediting us as
-		the committer in your virtual branch commits to help spread the word.
+		{$t('settings.free_tier_description')}
 		<Link
 			href="https://github.com/gitbutlerapp/gitbutler-docs/blob/d81a23779302c55f8b20c75bf7842082815b4702/content/docs/features/virtual-branches/committer-mark.mdx"
 		>
-			Learn more
+			{$t('settings.learn_more')}
 		</Link>
 	{/snippet}
 	{#snippet actions()}

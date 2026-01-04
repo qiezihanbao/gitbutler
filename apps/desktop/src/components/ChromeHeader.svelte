@@ -30,6 +30,7 @@
 		Tooltip
 	} from '@gitbutler/ui';
 	import { focusable } from '@gitbutler/ui/focus/focusable';
+	import { get } from 'svelte/store';
 
 	type Props = {
 		projectId: string;
@@ -104,7 +105,7 @@
 	const isOnWorkspacePage = $derived(!!isWorkspacePath());
 
 	// Language switcher
-	const currentLocale = $derived(locale.get() as SupportedLocale);
+	const currentLocale = $derived(get(locale) as SupportedLocale);
 	const localeDisplay = $derived(getLocaleName(currentLocale));
 	const localeIcon = $derived(currentLocale === 'zh' ? '🇨🇳' : '🇺🇸');
 
@@ -272,11 +273,12 @@
 				kind="outline"
 				reversedDirection
 				onclick={handleLanguageSwitch}
+				class="language-button"
 			>
 				{#snippet custom()}
 					<div class="language-switcher">
 						<span class="language-icon">{localeIcon}</span>
-						<span class="language-text">{$localeDisplay}</span>
+						<span class="language-text">{localeDisplay}</span>
 					</div>
 				{/snippet}
 			</Button>
@@ -298,7 +300,7 @@
 				reversedDirection
 				onclick={() => createBranchModal?.show()}
 			>
-				Create branch
+				{$t('branches.create')}
 			</Button>
 			{#if !$codegenDisabled}
 				<Button
@@ -415,16 +417,29 @@
 		display: flex;
 		align-items: center;
 		gap: 6px;
+		min-width: 70px;
+		padding: 0 2px;
 	}
 
 	.language-icon {
 		font-size: 14px;
 		line-height: 1;
+		flex-shrink: 0;
 	}
 
 	.language-text {
 		font-size: 12px;
 		font-weight: 600;
 		text-transform: uppercase;
+		white-space: nowrap;
+		min-width: 40px;
+		text-align: center;
+	}
+
+	/* 语言按钮自适应宽度 */
+	:global(.language-button) {
+		width: auto !important;
+		min-width: 70px;
+		max-width: none !important;
 	}
 </style>

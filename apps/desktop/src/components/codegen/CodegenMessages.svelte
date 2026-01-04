@@ -24,6 +24,7 @@
 		type Message
 	} from '$lib/codegen/messages';
 	import { parseTemplates } from '$lib/codegen/templateParser';
+	import { t } from '$lib/i18n/i18n';
 
 	import { SETTINGS_SERVICE } from '$lib/config/appSettingsV2';
 	import { RULES_SERVICE } from '$lib/rules/rulesService.svelte';
@@ -132,16 +133,16 @@
 	];
 
 	const thinkingLevels: { label: string; shortLabel: string; value: ThinkingLevel }[] = [
-		{ label: 'Normal', shortLabel: 'Normal', value: 'normal' },
-		{ label: 'Think', shortLabel: 'Think', value: 'think' },
-		{ label: 'Mega think', shortLabel: 'Mega', value: 'megaThink' },
-		{ label: 'Ultra think', shortLabel: 'Ultra', value: 'ultraThink' }
+		{ label: $t('codegen.thinking_mode_normal'), shortLabel: $t('codegen.thinking_mode_short_normal'), value: 'normal' },
+		{ label: $t('codegen.thinking_mode_think'), shortLabel: $t('codegen.thinking_mode_short_think'), value: 'think' },
+		{ label: $t('codegen.thinking_mode_mega_think'), shortLabel: $t('codegen.thinking_mode_short_mega'), value: 'megaThink' },
+		{ label: $t('codegen.thinking_mode_ultra_think'), shortLabel: $t('codegen.thinking_mode_short_ultra'), value: 'ultraThink' }
 	];
 
 	const permissionModeOptions: { label: string; value: PermissionMode }[] = [
-		{ label: 'Edit with permission', value: 'default' },
-		{ label: 'Planning', value: 'plan' },
-		{ label: 'Accept edits', value: 'acceptEdits' }
+		{ label: $t('codegen.permission_mode_edit_with_permission'), value: 'default' },
+		{ label: $t('codegen.permission_mode_planning'), value: 'plan' },
+		{ label: $t('codegen.permission_mode_accept_edits'), value: 'acceptEdits' }
 	];
 
 	const promptTemplates = $derived(claudeCodeService.promptTemplates(projectId));
@@ -214,7 +215,7 @@
 
 	function thinkingLevelToUiLabel(level: ThinkingLevel, short: boolean = false): string {
 		const thinkingLevel = thinkingLevels.find((t) => t.value === level);
-		if (!thinkingLevel) return 'Normal';
+		if (!thinkingLevel) return $t('codegen.thinking_mode_normal');
 		return short ? thinkingLevel.shortLabel : thinkingLevel.label;
 	}
 
@@ -342,13 +343,13 @@
 
 					<div class="flex gap-10 items-center">
 						{#if stats.tokens > 0}
-							<Tooltip text="Tokens: {stats.tokens.toLocaleString()} / ${stats.cost.toFixed(2)}">
+							<Tooltip text={$t('codegen.tokens_cost', { tokens: stats.tokens.toLocaleString(), cost: stats.cost.toFixed(2) })}>
 								<span class="text-12 clr-text-2">
 									{formatCompactNumber(stats.tokens)}
 								</span>
 							</Tooltip>
 
-							<Tooltip text="{contextUsage}% context used">
+							<Tooltip text={$t('codegen.context_used', { contextUsage })}>
 								<div
 									class="context-utilization-scale"
 									style="--context-utilization: {contextUsage}"
@@ -372,7 +373,7 @@
 								{#if onMcpSettings}
 									<ContextMenuSection>
 										<ContextMenuItem
-											label="MCP settings"
+											label={$t('codegen.mcp_settings')}
 											icon="mcp"
 											onclick={() => {
 												onMcpSettings?.();
@@ -383,7 +384,7 @@
 								{/if}
 								<ContextMenuSection>
 									<ContextMenuItem
-										label="Clear context"
+										label={$t('codegen.clear_context')}
 										icon="clear"
 										disabled={isDisabled}
 										onclick={() => {
@@ -392,7 +393,7 @@
 										}}
 									/>
 									<ContextMenuItem
-										label="Compact context"
+										label={$t('codegen.compact_context')}
 										icon="compact"
 										disabled={isDisabled}
 										onclick={() => {
@@ -413,26 +414,26 @@
 						<div class="no-agent-placeholder">
 							<div class="no-agent-placeholder__content">
 								{@html noClaudeCodeSvg}
-								<h2 class="text-serif-42">Connect Claude Code</h2>
+								<h2 class="text-serif-42">{$t('codegen.connect_claude_code_title')}</h2>
 								<p class="text-13 text-body clr-text-2">
-									If you haven't installed Claude Code, check our <Link
+									{$t('codegen.if_you_havent_installed')} <Link
 										class="clr-text-1"
 										href="https://docs.gitbutler.com/features/agents-tab#installing-claude-code"
-										>installation guide</Link
+										>{$t('codegen.installation_guide')}</Link
 									>.
 									<br />
-									Click the button below to check if Claude Code is now available.
+									{$t('codegen.click_button_check_available')}
 								</p>
 
 								<ClaudeCheck />
 							</div>
 
 							<p class="text-12 text-body clr-text-2">
-								Having trouble connecting?
+								{$t('codegen.having_trouble_connecting')}
 								<br />
-								Check the <Link href="https://docs.claude.com/en/docs/claude-code/troubleshooting"
-									>troubleshooting guide</Link
-								> for common issues and solutions.
+								{$t('codegen.check_troubleshooting_guide')} <Link href="https://docs.claude.com/en/docs/claude-code/troubleshooting"
+									>{$t('codegen.troubleshooting_guide')}</Link
+								> {$t('codegen.for_common_issues')}
 							</p>
 						</div>
 					</ConfigurableScrollableContainer>
@@ -445,12 +446,12 @@
 							bottomMargin={0}
 						>
 							{#snippet title()}
-								Let's build something amazing
+								{$t('codegen.lets_build_something_amazing')}
 							{/snippet}
 							{#snippet caption()}
-								Your canvas is clear
+								{$t('codegen.your_canvas_is_clear')}
 								<br />
-								Let the code take shape
+								{$t('codegen.let_code_take_shape')}
 							{/snippet}
 						</EmptyStatePlaceholder>
 					</div>
@@ -548,7 +549,7 @@
 									bind:el={templateTrigger}
 									kind="ghost"
 									icon="script"
-									tooltip="Insert template"
+									tooltip={$t('codegen.insert_template')}
 									onclick={(e) => templateContextMenu?.toggle(e)}
 								/>
 								<Button
@@ -557,7 +558,7 @@
 									icon="thinking"
 									reversedDirection
 									onclick={() => thinkingModeContextMenu?.toggle()}
-									tooltip="Thinking mode"
+									tooltip={$t('codegen.thinking_mode')}
 									children={selectedThinkingLevel === 'normal' ? undefined : thinkingBtnText}
 								/>
 								<Button
@@ -567,7 +568,7 @@
 									shrinkable
 									onclick={() => permissionModeContextMenu?.toggle()}
 									tooltip={$settingsService?.claude.dangerouslyAllowAllPermissions
-										? 'Permission modes disable when all permissions are allowed'
+										? $t('codegen.permission_modes_disable')
 										: permissionModeLabel}
 									disabled={$settingsService?.claude.dangerouslyAllowAllPermissions}
 								/>
@@ -602,18 +603,17 @@
 	bind:this={clearContextModal}
 	width="small"
 	type="warning"
-	title="Clear context"
+	title={$t('codegen.clear_context')}
 	onSubmit={async (close) => {
 		await performClearContextAndRules();
 		close();
 	}}
 >
-	Are you sure you want to clear the context and delete all rules associated with this Claude
-	session? This action cannot be undone.
+	{$t('codegen.clear_context_confirmation')}
 
 	{#snippet controls(close)}
-		<Button kind="outline" onclick={close}>Cancel</Button>
-		<Button style="danger" type="submit">Clear context</Button>
+		<Button kind="outline" onclick={close}>{$t('common.cancel')}</Button>
+		<Button style="danger" type="submit">{$t('codegen.clear_context')}</Button>
 	{/snippet}
 </Modal>
 
@@ -689,7 +689,7 @@
 	</ContextMenuSection>
 	<ContextMenuSection>
 		<ContextMenuItem
-			label="Edit templates…"
+			label={$t('codegen.edit_templates')}
 			icon="edit"
 			onclick={() => {
 				promptConfigModal?.show();
